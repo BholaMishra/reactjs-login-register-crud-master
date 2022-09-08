@@ -1,602 +1,528 @@
-import React, { Component } from 'react';
+// // import React, { useState, Paper } from 'react';
+// import Header from "../elements/header";
+// import Sidebar from "../elements/sidebar";
+// import { Link, button } from 'react-router-dom';
+// import moment from "moment"
+// import React, { useState, useEffect } from "react";
+// import axios from "axios";
+// import { makeStyles } from '@material-ui/core/styles';
+// import Paper from '@material-ui/core/Paper';
+// import Table from '@material-ui/core/Table';
+// import TableBody from '@material-ui/core/TableBody';
+// import TableCell from '@material-ui/core/TableCell';
+// import TableContainer from '@material-ui/core/TableContainer';
+// import TableHead from '@material-ui/core/TableHead';
+// import TablePagination from '@material-ui/core/TablePagination';
+// import TableRow from '@material-ui/core/TableRow';
+// import Button from '@material-ui/core/Button';
+
+
+// export default function StickyHeadTable() {
+// const useStyles = makeStyles({
+//     root: {
+//         width: '100%',
+//     },
+//     container: {
+//         maxHeight: 440,
+//     },
+// });
+
+// //   const classes = useStyles();
+
+// // const classes = useStyles();
+// const [page, setPage] = useState(0);
+// const [rowsPerPage, setRowsPerPage] = useState(10);
+
+// const handleChangePage = (event, newPage) => {
+//     setPage(newPage);
+// };
+
+// const handleChangeRowsPerPage = (event) => {
+//     setRowsPerPage(parseInt(+event.target.value, 10));
+//     setPage(0);
+// };
+
+// // All Data handle for data
+// const [data, setData] = useState([]);
+// // handle for pagination data
+// //   const [page, setPage] = useState(0);
+
+// //   // handle for tables rows
+// //   const [rowsPerPage, setRowsPerPage] = useState(5);
+
+
+// React.useEffect(() => {
+//     axios.get(`https://qaapi.jahernotice.com/api/Epp`).then((response) => {
+//         setData(response.data.data);
+//         console.log("anuj", response.data.data)
+//     });
+// }, []);
+
+
+// return (
+//     <>
+//         <div>
+//             <Header />
+//             <div id="wrapper">
+//                 <Sidebar></Sidebar>
+//                 <div id="content-wrapper">
+
+//                     <div className="container-fluid">
+//                         {/* <ol className="breadcrumb"> */}
+//                         <Paper sx={{ width: "200%", mb: 0 }}>
+//                             <ol className="breadcrumb">
+//                                 <li className="breadcrumb-item">
+//                                     <Link to={'/dashboard'} >Dashboard</Link>
+//                                 </li>
+//                                 <li className="breadcrumb-item active">Overview</li>
+//                             </ol>
+//                             <div className="AddEpp" style={{ border: 'none', color: 'revert' }}>
+//                                 {/* <ul className="nav nav-tabs nav-justified"> */}
+//                                 <Button className="btn btn-primary tg " id="addd" variant="contained" color="primary">
+//                                     <Link variant="contained" color="primary" to={"/eppnewadd"} style={{ border: 'none', color: 'white' }}>Add New Epp</Link>
+
+//                                 </Button>
+//                                 {/* <br/> */}
+//                                 <Button className="btn btn-primary tg " id="addd1" variant="contained" color="primary">
+//                                     <Link variant="contained" color="primary" to={"/eppnewadd1"} style={{ border: 'none', color: 'white' }}>Add Exiting EPP</Link>
+//                                 </Button>
+//                                 {/* <button className="btn btn-primary tg "><Link to={"/eppnewadd"} style={{ border: 'none', color: 'white' }}>Add New APP</Link></button> */}
+//                                 {/* <button className="btn btn-primary ta  "><Link to={"/eppnewadd1"} style={{ border: 'none', color: 'white' }}>Add Exiting EPP</Link></button> */}
+//                                 {/* </ul> */}
+//                             </div>
+//                             <br />
+//                             <form>
+//                                 <div className="tb-table-table" style={{ color: '', border: '1px' }}>
+
+//                                     <Button className="btn btn-primary btn-lg " variant="contained" color="primary">
+//                                         ALL
+//                                     </Button>
+//                                     {/* className='NAV font-weight-bold' */}
+//                                     <Button className="btn1 btn-lg  " style={{ border: 'none' }} variant="contained" color="primary">
+//                                         <Link className='NAV font-weight-bold' variant="contained" color="primary" to={"/previaus"} style={{ border: 'none', color: 'blac' }}>Previous-Month</Link>
+//                                     </Button>
+//                                     <Button className="btn2 btn-lg  " style={{ border: 'none' }} variant="contained" color="primary">
+//                                         <Link className='NAV font-weight-bold' variant="contained" color="primary" to={"/this"} style={{ border: 'none', color: 'blac' }}>This-Month</Link>
+//                                     </Button>
+//                                     <Button className="btn3 btn-lg  " style={{ border: 'none' }} variant="contained" color="primary">
+//                                         <Link className='NAV font-weight-bold' variant="contained" color="primary" to={"/next"} style={{ border: 'none', color: 'blac' }}>Next-Month</Link>
+//                                     </Button>
+
+//                                 </div>
+//                             </form>
+//                             <form className='contenar'>
+//                                 <>
+//                                     <form className="" style={{ border: '1px' }}>
+//                                         <div class="form-row">
+//                                             <div class="col">
+//                                                 <label className="show">
+//                                                     <TablePagination
+//                                                         rowsPerPageOptions={[5, 10, 25, 50, 100]}
+//                                                         component="div"
+//                                                         count={data.length}
+//                                                         rowsPerPage={rowsPerPage}
+//                                                         page={page}
+//                                                         onPageChange={handleChangePage}
+//                                                         onRowsPerPageChange={handleChangeRowsPerPage}
+//                                                     />
+//                                                 </label>
+//                                             </div>
+//                                             <div className="search">
+//                                                 <div className='box-table-table-bordered' style={{ backgroundcolor: 'red', border: '1px' }}>
+//                                                     <div id='entrybox'>
+//                                                         <div class="input-group-mb-3">
+//                                                             <div className="input-group a">
+//                                                                 <input type="text" className="form-control" placeholder="Search for..." aria-label="Search"
+//                                                                     aria-describedby="basic-addon2" style={{ height: '2rem', width: '-40rem', }} />
+//                                                                 <div className="input-group-append" >
+//                                                                     <Button className=" btn-primary b " type="button" style={{
+//                                                                         width: '2.5rem',
+//                                                                         height: '2rem',
+//                                                                         border: 'none'
+//                                                                     }} variant="contained" color="primary">
+//                                                                         <i className="fas fa-search"></i>
+//                                                                     </Button>
+//                                                                 </div>
+//                                                             </div>
+//                                                         </div>
+//                                                     </div>
+//                                                 </div>
+//                                             </div>
+//                                         </div>
+//                                     </form>
+//                                 </>
+//                                 <br />
+
+//                                 {/* <br /> */}
+
+//                                 {/* <TableContainer component={Paper}> */}
+//                                 <Table
+//                                     sx={{ minWidth: 650 }}
+//                                     className="table table-striped table-hover"
+//                                     size="small"
+//                                     aria-label="simple table"
+//                                 >
+//                                     <TableHead>
+//                                         <TableRow>
+//                                             <TableCell>Sr.No</TableCell>
+//                                             <TableCell>Name</TableCell>
+//                                             {/* <TableCell>LastName</TableCell> */}
+//                                             <TableCell>MobileNo</TableCell>
+//                                             <TableCell>EmailID</TableCell>
+//                                             <TableCell>UserID</TableCell>
+//                                             <TableCell>EPPCount</TableCell>
+//                                             <TableCell>group_id</TableCell>
+//                                             <TableCell>start_date</TableCell>
+//                                             <TableCell> end_date</TableCell>
+//                                             <TableCell>Action</TableCell>
+//                                         </TableRow>
+//                                     </TableHead>
+//                                     <TableBody>
+//                                         {data
+//                                             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+//                                             .map((data, index) => (
+//                                                 <TableRow
+//                                                     key={index}
+//                                                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+//                                                 >
+//                                                     <TableCell>{index + 1}</TableCell>
+//                                                     <TableCell>{data.FirstName} {data.LastName}</TableCell>
+//                                                     {/* <TableCell>{data.LastName}</TableCell> */}
+//                                                     <TableCell>{data.MobileNo}</TableCell>
+//                                                     <TableCell>{data.EmailID}</TableCell>
+//                                                     <TableCell>{data.UserID}</TableCell>
+//                                                     <TableCell>{data.EPPCount}</TableCell>
+//                                                     <TableCell>{data.group_id}</TableCell>
+//                                                     <TableCell>{moment(data.start_date).format("DD/MMM/YYYY")}</TableCell>
+//                                                     <TableCell>{moment(data.end_date).format("DD/MMM/YYYY")}</TableCell>
+//                                                     <TableCell>
+//                                                         <div class="row">
+//                                                             <div class="col-1" style={{ bold: '2' }}>
+
+//                                                                 <Link className="Di-Boxa" to={"/eppt2"} style={{ border: 'none', color: 'black' }}>
+//                                                                     <i class="bi bi-plus" >
+//                                                                         <svg className="Di-Boxa" to={"/eppt2"} width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+//                                                                             <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+//                                                                         </svg></i></Link>
+
+//                                                             </div>
+//                                                             <div class="col-1" style={{ bold: '2' }}>
+
+//                                                                 <Link className="Di-Box" to={"/eppadd1"} style={{ border: 'none', color: 'black' }}>
+//                                                                     <i class="bi bi-box-arrow-in-down-left">
+//                                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-down-left" viewBox="0 0 16 16">
+//                                                                             <path fill-rule="evenodd" d="M9.636 2.5a.5.5 0 0 0-.5-.5H2.5A1.5 1.5 0 0 0 1 3.5v10A1.5 1.5 0 0 0 2.5 15h10a1.5 1.5 0 0 0 1.5-1.5V6.864a.5.5 0 0 0-1 0V13.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z" />
+//                                                                             <path fill-rule="evenodd" d="M5 10.5a.5.5 0 0 0 .5.5h5a.5.5 0 0 0 0-1H6.707l8.147-8.146a.5.5 0 0 0-.708-.708L6 9.293V5.5a.5.5 0 0 0-1 0v5z" />
+//                                                                         </svg></i>
+//                                                                 </Link>
+
+//                                                             </div>
+//                                                         </div>
+//                                                     </TableCell>
+//                                                 </TableRow>
+//                                             ))}
+//                                     </TableBody>
+//                                 </Table>
+//                                 {/* </TableContainer> */}
+//                                 {/* table pagination */}
+//                                 <TablePagination
+//                                     rowsPerPageOptions={[5, 10, 25, 50, 100]}
+//                                     component="div"
+//                                     count={data.length}
+//                                     rowsPerPage={rowsPerPage}
+//                                     page={page}
+//                                     onPageChange={handleChangePage}
+//                                     onRowsPerPageChange={handleChangeRowsPerPage}
+//                                 />
+//                             </form>
+//                         </Paper>
+//                         {/* </ol> */}
+//                     </div>
+//                 </div>
+//             </div>
+//         </div>
+
+//     </>
+// );
+//                                                     }
+// // export default Dashboard
+
+
+// import React, { useState, Paper } from 'react';
 import Header from "../elements/header";
 import Sidebar from "../elements/sidebar";
-import { Link } from 'react-router-dom';
+import { Link, button } from 'react-router-dom';
+import moment from "moment"
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TablePagination from '@material-ui/core/TablePagination';
+import TableRow from '@material-ui/core/TableRow';
+// import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 
 
-export default class Dashboard extends Component {
+export default function StickyHeadTable() {
+    const useStyles = makeStyles({
+        root: {
+            '& > *': {
+                // margin: theme.spacing(1),
+            },
+            width: '100%',
+        },
+        container: {
+            maxHeight: 440,
+        },
+        root: {
 
-    render() {
-        return (
+        },
+    });
+
+    //   const classes = useStyles();
+
+    // const classes = useStyles();
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
+
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(parseInt(+event.target.value, 10));
+        setPage(0);
+    };
+
+    // All Data handle for data
+    const [data, setData] = useState([]);
+    // handle for pagination data
+    //   const [page, setPage] = useState(0);
+
+    //   // handle for tables rows
+    //   const [rowsPerPage, setRowsPerPage] = useState(5);
+
+
+    React.useEffect(() => {
+        axios.get(`https://qaapi.jahernotice.com/api/Epp`).then((response) => {
+            setData(response.data.data);
+            console.log("anuj", response.data.data)
+        });
+    }, []);
+
+    // import React from 'react';
+
+
+
+
+
+
+
+
+    return (
+        <>
             <div>
-                <Header/>
+                <Header />
                 <div id="wrapper">
                     <Sidebar></Sidebar>
                     <div id="content-wrapper">
                         <div className="container-fluid">
-                            <ol className="breadcrumb">
-                                <li className="breadcrumb-item">
-                                    <Link to={'/dashboard'} >Dashboard</Link>
-                                </li>
-                                <li className="breadcrumb-item active">Overview</li>
-                            </ol>
+                            {/* <ol className="breadcrumb"> */}
+                            <Paper sx={{ width: "100%", mb: 0 }}>
+                                <TableContainer component={Paper}>
+                                    <ol className="breadcrumb">
+                                        <li className="breadcrumb-item">
+                                            <Link to={'/dashboard'} >Dashboard</Link>
+                                        </li>
+                                        <li className="breadcrumb-item active">Overview</li>
+                                    </ol>
+                                    <div className="AddEpp" style={{ border: 'none', color: 'revert' }}>
+                                        {/* <ul className="nav nav-tabs nav-justified"> */}
+                                        <Button className="btn btn-primary tg " id="addd" variant="contained" color="primary">
+                                            <Link variant="contained" color="primary" to={"/eppnewadd"} style={{ border: 'none', color: 'white' }}>Add New Epp</Link>
 
-                            <div className="row">
-                                <div className="col-xl-3 col-sm-6 mb-3">
-                                    <div className="card text-white bg-primary o-hidden h-100">
-                                        <div className="card-body">
-                                            <div className="card-body-icon">
-                                                <i className="fas fa-fw fa-comments"></i>
-                                            </div>
-                                            <div className="mr-5">26 New Messages!</div>
-                                        </div>
-                                        <Link className="card-footer text-white clearfix small z-1" to={'#'}>
-                                            <span className="float-left">View Details</span>
-                                            <span className="float-right"><i className="fas fa-angle-right"></i></span>
-                                        </Link>
+                                        </Button>
+                                        {/* <br/> */}
+                                        <Button className="btn btn-primary tg " id="addd1" variant="contained" color="primary">
+                                            <Link variant="contained" color="primary" to={"/eppnewadd1"} style={{ border: 'none', color: 'white' }}>Add Exiting EPP</Link>
+                                        </Button>
+                                        {/* <button className="btn btn-primary tg "><Link to={"/eppnewadd"} style={{ border: 'none', color: 'white' }}>Add New APP</Link></button> */}
+                                        {/* <button className="btn btn-primary ta  "><Link to={"/eppnewadd1"} style={{ border: 'none', color: 'white' }}>Add Exiting EPP</Link></button> */}
+                                        {/* </ul> */}
                                     </div>
-                                </div>
-                                <div className="col-xl-3 col-sm-6 mb-3">
-                                    <div className="card text-white bg-warning o-hidden h-100">
-                                        <div className="card-body">
-                                            <div className="card-body-icon">
-                                                <i className="fas fa-fw fa-list"></i>
-                                            </div>
-                                            <div className="mr-5">11 New Tasks!</div>
-                                        </div>
-                                        <Link className="card-footer text-white clearfix small z-1" to="#">
-                                            <span className="float-left">View Details</span>
-                                            <span className="float-right"><i className="fas fa-angle-right"></i></span>
-                                        </Link>
-                                    </div>
-                                </div>
-                                <div className="col-xl-3 col-sm-6 mb-3">
-                                    <div className="card text-white bg-success o-hidden h-100">
-                                        <div className="card-body">
-                                            <div className="card-body-icon">
-                                                <i className="fas fa-fw fa-shopping-cart"></i>
-                                            </div>
-                                            <div className="mr-5">123 New Orders!</div>
-                                        </div>
-                                        <Link className="card-footer text-white clearfix small z-1" to="#">
-                                            <span className="float-left">View Details</span>
-                                            <span className="float-right"><i className="fas fa-angle-right"></i></span>
-                                        </Link>
-                                    </div>
-                                </div>
-                                <div className="col-xl-3 col-sm-6 mb-3">
-                                    <div className="card text-white bg-danger o-hidden h-100">
-                                        <div className="card-body">
-                                            <div className="card-body-icon">
-                                                <i className="fas fa-fw fa-life-ring"></i>
-                                            </div>
-                                            <div className="mr-5">13 New Tickets!</div>
-                                        </div>
-                                        <Link className="card-footer text-white clearfix small z-1" to="#">
-                                            <span className="float-left">View Details</span>
-                                            <span className="float-right"><i className="fas fa-angle-right"></i></span>
-                                        </Link>
-                                    </div>
-                                </div>
-                            </div>
+                                    <br />
+                                    <form>
+                                        <div className="tb-table-table" style={{ color: '', border: '1px' }}>
 
-                            <div className="card mb-3">
-                                <div className="card-header">
-                                    <i className="fas fa-chart-area"></i>
-                                    Area Chart Example
-                                </div>
-                                <div className="card-body">
-                                    <canvas id="myAreaChart" width="100%" height="30"></canvas>
-                                </div>
-                                <div className="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-                            </div>
+                                            <Button className="btn btn-primary btn-lg " variant="contained" color="primary">
+                                                ALL
+                                            </Button>
+                                            {/* className='NAV font-weight-bold' */}
+                                            <Button className="btn1 btn-lg  " style={{ border: 'none', }} variant="contained" color="primary">
+                                                <Link className='NAV font-weight-bold' variant="contained" color="primary" to={"/previaus"} style={{ border: 'none', color: 'blac' }}>Previous-Month</Link>
+                                            </Button>
+                                            <Button className="btn2 btn-lg  " style={{ border: 'none' }} variant="contained" color="primary">
+                                                <Link className='NAV font-weight-bold' variant="contained" color="primary" to={"/this"} style={{ border: 'none', color: 'blac' }}>This-Month</Link>
+                                            </Button>
+                                            <Button className="btn3 btn-lg  " style={{ border: 'none' }} variant="contained" color="primary">
+                                                <Link className='NAV font-weight-bold' variant="contained" color="primary" to={"/next"} style={{ border: 'none', color: 'blac' }}>Next-Month</Link>
+                                            </Button>
 
-                            <div className="card mb-3">
-                                <div className="card-header">
-                                    <i className="fas fa-table"></i>
-                                    Data Table Example
-                                </div>
-                                <div className="card-body">
-                                    <div className="table-responsive">
-                                        <table className="table table-bordered" id="dataTable" width="100%"
-                                               cellSpacing="0">
-                                            <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
-                                                <th>Age</th>
-                                                <th>Start date</th>
-                                                <th>Salary</th>
-                                            </tr>
-                                            </thead>
-                                            <tfoot>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
-                                                <th>Age</th>
-                                                <th>Start date</th>
-                                                <th>Salary</th>
-                                            </tr>
-                                            </tfoot>
-                                            <tbody>
-                                            <tr>
-                                                <td>Bhola Mishra</td>
-                                                <td>React.Js Developer</td>
-                                                <td>esmsys</td>
-                                                <td>19</td>
-                                                <td>2022/07/01</td>
-                                                <td>$10,000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Vijay Mishra</td>
-                                                <td>Angular Developer</td>
-                                                <td>DocEazy Pune</td>
-                                                <td>20</td>
-                                                <td>2021/11/29</td>
-                                                <td>$25,000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Anuj Vyas</td>
-                                                <td>React.Js Developer</td>
-                                                <td>DocEazy Pune</td>
-                                                <td>20</td>
-                                                <td>2021/12/01</td>
-                                                <td>$25,000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Sneh Jaiswal</td>
-                                                <td>Node.Js Developer</td>
-                                                <td>Edinburgh</td>
-                                                <td>19</td>
-                                                <td>2022/07/15</td>
-                                                <td>$10,000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Airi Satou</td>
-                                                <td>Accountant</td>
-                                                <td>Tokyo</td>
-                                                <td>33</td>
-                                                <td>2008/11/28</td>
-                                                <td>$162,700</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Brielle Williamson</td>
-                                                <td>Integration Specialist</td>
-                                                <td>New York</td>
-                                                <td>61</td>
-                                                <td>2012/12/02</td>
-                                                <td>$372,000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Herrod Chandler</td>
-                                                <td>Sales Assistant</td>
-                                                <td>San Francisco</td>
-                                                <td>59</td>
-                                                <td>2012/08/06</td>
-                                                <td>$137,500</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Rhona Davidson</td>
-                                                <td>Integration Specialist</td>
-                                                <td>Tokyo</td>
-                                                <td>55</td>
-                                                <td>2010/10/14</td>
-                                                <td>$327,900</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Colleen Hurst</td>
-                                                <td>Javascript Developer</td>
-                                                <td>San Francisco</td>
-                                                <td>39</td>
-                                                <td>2009/09/15</td>
-                                                <td>$205,500</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Sonya Frost</td>
-                                                <td>Software Engineer</td>
-                                                <td>Edinburgh</td>
-                                                <td>23</td>
-                                                <td>2008/12/13</td>
-                                                <td>$103,600</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Jena Gaines</td>
-                                                <td>Office Manager</td>
-                                                <td>London</td>
-                                                <td>30</td>
-                                                <td>2008/12/19</td>
-                                                <td>$90,560</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Quinn Flynn</td>
-                                                <td>Support Lead</td>
-                                                <td>Edinburgh</td>
-                                                <td>22</td>
-                                                <td>2013/03/03</td>
-                                                <td>$342,000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Charde Marshall</td>
-                                                <td>Regional Director</td>
-                                                <td>San Francisco</td>
-                                                <td>36</td>
-                                                <td>2008/10/16</td>
-                                                <td>$470,600</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Haley Kennedy</td>
-                                                <td>Senior Marketing Designer</td>
-                                                <td>London</td>
-                                                <td>43</td>
-                                                <td>2012/12/18</td>
-                                                <td>$313,500</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Tatyana Fitzpatrick</td>
-                                                <td>Regional Director</td>
-                                                <td>London</td>
-                                                <td>19</td>
-                                                <td>2010/03/17</td>
-                                                <td>$385,750</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Michael Silva</td>
-                                                <td>Marketing Designer</td>
-                                                <td>London</td>
-                                                <td>66</td>
-                                                <td>2012/11/27</td>
-                                                <td>$198,500</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Paul Byrd</td>
-                                                <td>Chief Financial Officer (CFO)</td>
-                                                <td>New York</td>
-                                                <td>64</td>
-                                                <td>2010/06/09</td>
-                                                <td>$725,000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Gloria Little</td>
-                                                <td>Systems Administrator</td>
-                                                <td>New York</td>
-                                                <td>59</td>
-                                                <td>2009/04/10</td>
-                                                <td>$237,500</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Bradley Greer</td>
-                                                <td>Software Engineer</td>
-                                                <td>London</td>
-                                                <td>41</td>
-                                                <td>2012/10/13</td>
-                                                <td>$132,000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Dai Rios</td>
-                                                <td>Personnel Lead</td>
-                                                <td>Edinburgh</td>
-                                                <td>35</td>
-                                                <td>2012/09/26</td>
-                                                <td>$217,500</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Jenette Caldwell</td>
-                                                <td>Development Lead</td>
-                                                <td>New York</td>
-                                                <td>30</td>
-                                                <td>2011/09/03</td>
-                                                <td>$345,000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Yuri Berry</td>
-                                                <td>Chief Marketing Officer (CMO)</td>
-                                                <td>New York</td>
-                                                <td>40</td>
-                                                <td>2009/06/25</td>
-                                                <td>$675,000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Caesar Vance</td>
-                                                <td>Pre-Sales Support</td>
-                                                <td>New York</td>
-                                                <td>21</td>
-                                                <td>2011/12/12</td>
-                                                <td>$106,450</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Doris Wilder</td>
-                                                <td>Sales Assistant</td>
-                                                <td>Sidney</td>
-                                                <td>23</td>
-                                                <td>2010/09/20</td>
-                                                <td>$85,600</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Angelica Ramos</td>
-                                                <td>Chief Executive Officer (CEO)</td>
-                                                <td>London</td>
-                                                <td>47</td>
-                                                <td>2009/10/09</td>
-                                                <td>$1,200,000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Gavin Joyce</td>
-                                                <td>Developer</td>
-                                                <td>Edinburgh</td>
-                                                <td>42</td>
-                                                <td>2010/12/22</td>
-                                                <td>$92,575</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Jennifer Chang</td>
-                                                <td>Regional Director</td>
-                                                <td>Singapore</td>
-                                                <td>28</td>
-                                                <td>2010/11/14</td>
-                                                <td>$357,650</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Brenden Wagner</td>
-                                                <td>Software Engineer</td>
-                                                <td>San Francisco</td>
-                                                <td>28</td>
-                                                <td>2011/06/07</td>
-                                                <td>$206,850</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Fiona Green</td>
-                                                <td>Chief Operating Officer (COO)</td>
-                                                <td>San Francisco</td>
-                                                <td>48</td>
-                                                <td>2010/03/11</td>
-                                                <td>$850,000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Shou Itou</td>
-                                                <td>Regional Marketing</td>
-                                                <td>Tokyo</td>
-                                                <td>20</td>
-                                                <td>2011/08/14</td>
-                                                <td>$163,000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Michelle House</td>
-                                                <td>Integration Specialist</td>
-                                                <td>Sidney</td>
-                                                <td>37</td>
-                                                <td>2011/06/02</td>
-                                                <td>$95,400</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Suki Burks</td>
-                                                <td>Developer</td>
-                                                <td>London</td>
-                                                <td>53</td>
-                                                <td>2009/10/22</td>
-                                                <td>$114,500</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Prescott Bartlett</td>
-                                                <td>Technical Author</td>
-                                                <td>London</td>
-                                                <td>27</td>
-                                                <td>2011/05/07</td>
-                                                <td>$145,000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Gavin Cortez</td>
-                                                <td>Team Leader</td>
-                                                <td>San Francisco</td>
-                                                <td>22</td>
-                                                <td>2008/10/26</td>
-                                                <td>$235,500</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Martena Mccray</td>
-                                                <td>Post-Sales support</td>
-                                                <td>Edinburgh</td>
-                                                <td>46</td>
-                                                <td>2011/03/09</td>
-                                                <td>$324,050</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Unity Butler</td>
-                                                <td>Marketing Designer</td>
-                                                <td>San Francisco</td>
-                                                <td>47</td>
-                                                <td>2009/12/09</td>
-                                                <td>$85,675</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Howard Hatfield</td>
-                                                <td>Office Manager</td>
-                                                <td>San Francisco</td>
-                                                <td>51</td>
-                                                <td>2008/12/16</td>
-                                                <td>$164,500</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Hope Fuentes</td>
-                                                <td>Secretary</td>
-                                                <td>San Francisco</td>
-                                                <td>41</td>
-                                                <td>2010/02/12</td>
-                                                <td>$109,850</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Vivian Harrell</td>
-                                                <td>Financial Controller</td>
-                                                <td>San Francisco</td>
-                                                <td>62</td>
-                                                <td>2009/02/14</td>
-                                                <td>$452,500</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Timothy Mooney</td>
-                                                <td>Office Manager</td>
-                                                <td>London</td>
-                                                <td>37</td>
-                                                <td>2008/12/11</td>
-                                                <td>$136,200</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Jackson Bradshaw</td>
-                                                <td>Director</td>
-                                                <td>New York</td>
-                                                <td>65</td>
-                                                <td>2008/09/26</td>
-                                                <td>$645,750</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Olivia Liang</td>
-                                                <td>Support Engineer</td>
-                                                <td>Singapore</td>
-                                                <td>64</td>
-                                                <td>2011/02/03</td>
-                                                <td>$234,500</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Bruno Nash</td>
-                                                <td>Software Engineer</td>
-                                                <td>London</td>
-                                                <td>38</td>
-                                                <td>2011/05/03</td>
-                                                <td>$163,500</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Sakura Yamamoto</td>
-                                                <td>Support Engineer</td>
-                                                <td>Tokyo</td>
-                                                <td>37</td>
-                                                <td>2009/08/19</td>
-                                                <td>$139,575</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Thor Walton</td>
-                                                <td>Developer</td>
-                                                <td>New York</td>
-                                                <td>61</td>
-                                                <td>2013/08/11</td>
-                                                <td>$98,540</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Finn Camacho</td>
-                                                <td>Support Engineer</td>
-                                                <td>San Francisco</td>
-                                                <td>47</td>
-                                                <td>2009/07/07</td>
-                                                <td>$87,500</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Serge Baldwin</td>
-                                                <td>Data Coordinator</td>
-                                                <td>Singapore</td>
-                                                <td>64</td>
-                                                <td>2012/04/09</td>
-                                                <td>$138,575</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Zenaida Frank</td>
-                                                <td>Software Engineer</td>
-                                                <td>New York</td>
-                                                <td>63</td>
-                                                <td>2010/01/04</td>
-                                                <td>$125,250</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Zorita Serrano</td>
-                                                <td>Software Engineer</td>
-                                                <td>San Francisco</td>
-                                                <td>56</td>
-                                                <td>2012/06/01</td>
-                                                <td>$115,000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Jennifer Acosta</td>
-                                                <td>Junior Javascript Developer</td>
-                                                <td>Edinburgh</td>
-                                                <td>43</td>
-                                                <td>2013/02/01</td>
-                                                <td>$75,650</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Cara Stevens</td>
-                                                <td>Sales Assistant</td>
-                                                <td>New York</td>
-                                                <td>46</td>
-                                                <td>2011/12/06</td>
-                                                <td>$145,600</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Hermione Butler</td>
-                                                <td>Regional Director</td>
-                                                <td>London</td>
-                                                <td>47</td>
-                                                <td>2011/03/21</td>
-                                                <td>$356,250</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Lael Greer</td>
-                                                <td>Systems Administrator</td>
-                                                <td>London</td>
-                                                <td>21</td>
-                                                <td>2009/02/27</td>
-                                                <td>$103,500</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Jonas Alexander</td>
-                                                <td>Developer</td>
-                                                <td>San Francisco</td>
-                                                <td>30</td>
-                                                <td>2010/07/14</td>
-                                                <td>$86,500</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Shad Decker</td>
-                                                <td>Regional Director</td>
-                                                <td>Edinburgh</td>
-                                                <td>51</td>
-                                                <td>2008/11/13</td>
-                                                <td>$183,000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Michael Bruce</td>
-                                                <td>Javascript Developer</td>
-                                                <td>Singapore</td>
-                                                <td>29</td>
-                                                <td>2011/06/27</td>
-                                                <td>$183,000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Donna Snider</td>
-                                                <td>Customer Support</td>
-                                                <td>New York</td>
-                                                <td>27</td>
-                                                <td>2011/01/25</td>
-                                                <td>$112,000</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div className="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-                            </div>
+                                        </div>
+                                    </form>
 
+                                    {/* <div>Hello</div> */}
+                                    {/* <br /> */}
+                                    {/* <form>
+                                        <div className="tb-table-table" style={{ color: '', border: '1px' }}>
+                                            <ul class="nav nav-tabs nav-justified">
+                                            <button className="btn btn-primary btn-lg " Active>ALL</button>
+                                            <button className="btn1 btn-lg  " style={{ border: 'none' }}><Link to={"/previaus"} style={{ border: 'none' }}>Previous-Month</Link></button>
+                                            <button className="btn2 btn-lg " style={{ border: 'none' }}><Link to={"/this"} style={{ border: 'none' }}>This-Month</Link></button>
+                                            <button className="btn3 btn-lg " style={{ border: 'none', text: 'bold' }}><Link to={"/next"} style={{ border: 'none' }}>Next-Month</Link></button>
+                                            </ul>
+                                        </div>
+                                    </form> */}
+                                    <form className='contenar'>
+                                        <>
+                                            <form className="" style={{ border: '1px' }}>
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <label className="show">
+                                                            <TablePagination
+                                                                rowsPerPageOptions={[5, 10, 25, 50, 100, 150, 200]}
+                                                                component="div"
+                                                                count={data.length}
+                                                                rowsPerPage={rowsPerPage}
+                                                                page={page}
+                                                                onPageChange={handleChangePage}
+                                                                onRowsPerPageChange={handleChangeRowsPerPage}
+                                                            />
+                                                        </label>
+                                                    </div>
+                                                    <div className="search">
+                                                        <div className='box-table-table-bordered' style={{ backgroundcolor: 'red', border: '1px' }}>
+                                                            <div id='entrybox'>
+                                                                <div class="input-group-mb-3">
+                                                                    <div className="input-group a">
+                                                                        <input type="text" className="form-control" placeholder="Search for..." aria-label="Search"
+                                                                            aria-describedby="basic-addon2" style={{ height: '2rem', width: '-40rem', }} />
+                                                                        <div className="input-group-append" >
+                                                                            <Button className=" btn-primary b " type="button" style={{
+                                                                                width: '2.5rem',
+                                                                                height: '2rem',
+                                                                                border: 'none'
+                                                                            }} variant="contained" color="primary">
+                                                                                <i className="fas fa-search"></i>
+                                                                            </Button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </>
+                                        {/* </TableContainer > */}
+
+                                        {/* <br /> */}
+
+                                        <TableContainer component={Paper}>
+                                            <Table
+                                                sx={{ minWidth: 650 }}
+                                                className="table table-striped table-hover"
+                                                size="small"
+                                                aria-label="simple table"
+                                            >
+                                                <TableHead>
+                                                    <TableRow>
+                                                        <TableCell>Sr.No</TableCell>
+                                                        <TableCell>Name</TableCell>
+                                                        {/* <TableCell>LastName</TableCell> */}
+                                                        <TableCell>MobileNo</TableCell>
+                                                        <TableCell>EmailID</TableCell>
+                                                        <TableCell>UserID</TableCell>
+                                                        <TableCell>EPPCount</TableCell>
+                                                        <TableCell>group_id</TableCell>
+                                                        <TableCell>start_date</TableCell>
+                                                        <TableCell> end_date</TableCell>
+                                                        <TableCell>Action</TableCell>
+
+                                                    </TableRow>
+                                                </TableHead>
+                                                <TableBody>
+                                                    {data
+                                                        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                                        .map((data, index) => (
+                                                            <TableRow
+                                                                key={index}
+                                                                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                                                            >
+                                                                <TableCell>{index + 1}</TableCell>
+                                                                <TableCell>{data.FirstName} {data.LastName}</TableCell>
+                                                                {/* <TableCell>{data.LastName}</TableCell> */}
+                                                                <TableCell>{data.MobileNo}</TableCell>
+                                                                <TableCell>{data.EmailID}</TableCell>
+                                                                <TableCell>{data.UserID}</TableCell>
+                                                                <TableCell>{data.EPPCount}</TableCell>
+                                                                <TableCell>{data.group_id}</TableCell>
+                                                                <TableCell>{moment(data.start_date).format("DD/MMM/YYYY")}</TableCell>
+                                                                <TableCell>{moment(data.end_date).format("DD/MMM/YYYY")}</TableCell>
+                                                                <TableCell>
+                                                                    <div class="row">
+                                                                        <div class="col-1" style={{ bold: '2' }}>
+
+                                                                            <Link className="Di-Boxa" to={"/eppt2"} style={{ border: 'none', color: 'black' }}>
+                                                                                <i class="bi bi-plus" >
+                                                                                    <svg className="Di-Boxa" to={"/eppt2"} width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                                                                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                                                                                    </svg></i></Link>
+
+                                                                        </div>
+                                                                        <div class="col-1" style={{ bold: '2' }}>
+
+                                                                            <Link className="Di-Box" to={"/eppadd1"} style={{ border: 'none', color: 'black' }}>
+                                                                                <i class="bi bi-box-arrow-in-down-left">
+                                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-down-left" viewBox="0 0 16 16">
+                                                                                        <path fill-rule="evenodd" d="M9.636 2.5a.5.5 0 0 0-.5-.5H2.5A1.5 1.5 0 0 0 1 3.5v10A1.5 1.5 0 0 0 2.5 15h10a1.5 1.5 0 0 0 1.5-1.5V6.864a.5.5 0 0 0-1 0V13.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z" />
+                                                                                        <path fill-rule="evenodd" d="M5 10.5a.5.5 0 0 0 .5.5h5a.5.5 0 0 0 0-1H6.707l8.147-8.146a.5.5 0 0 0-.708-.708L6 9.293V5.5a.5.5 0 0 0-1 0v5z" />
+                                                                                    </svg></i>
+                                                                            </Link>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </TableCell>
+                                                            </TableRow>
+                                                        ))}
+                                                </TableBody>
+                                            </Table>
+                                        </TableContainer>
+                                        {/* </ table pagination> */}
+                                        <TablePagination
+                                            rowsPerPageOptions={[5, 10, 25, 50, 100]}
+                                            component="div"
+                                            count={data.length}
+                                            rowsPerPage={rowsPerPage}
+                                            page={page}
+                                            onPageChange={handleChangePage}
+                                            onRowsPerPageChange={handleChangeRowsPerPage}
+                                        />
+                                    </form>
+                                </TableContainer>
+                            </Paper>
+                            {/* </ol> */}
                         </div>
-
-                        <footer className="sticky-footer">
-                            <div className="container my-auto">
-                                <div className="copyright text-center my-auto">
-                                    <span>Copyright © Your Website 2022</span>
-                                </div>
-                            </div>
-                        </footer>
                     </div>
                 </div>
             </div>
 
-        );
-    }
+        </>
+    );
 }
+// export default Dashboard

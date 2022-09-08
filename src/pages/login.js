@@ -1,131 +1,301 @@
-import React, {Component} from 'react';
-import axios from 'axios';
-import {Link, Redirect} from 'react-router-dom';
-import TitleComponent from "./title";
+// // import React from 'react'
 
-export default class Login extends Component {
 
-    state = {
-        email: '',
-        password: '',
-        redirect: false,
-        authError: false,
-        isLoading: false,
-        location: {},
+// // const LoginForm=()=>{
+
+// //     const{useState}=React;
+
+// //     const[tick,settick]=useState(false);
+// //     const[inputtext,setinputtext]=useState({
+// //         name:"",
+// //         email:"",
+// //         password:"",
+
+// //     });
+// //     const[warnemail,setwarnemail]=useState(false);
+// //     const[warnname,setwarnname]=useState(false);
+// //     const[warnpassword,setwarnpassword]=useState(false);
+
+// //     const[eye,seteye]=useState(true);
+// //     const[passtype,setpasstype]=useState("password");
+// //     const[passred,setpassred]=useState(false); 
+
+
+// //     const [none,setnone]=useState(true);
+
+
+// //     const inputEvent=(event)=>{
+// //         const name=event.target.name;
+// //         const value=event.target.value;
+// //         if(name=="password"){
+// //             if(value.length>0){
+// //                 setnone(false);
+// //             }
+// //             else{
+// //                 setnone(true);
+// //             }
+// //         }
+// //         setinputtext((lastValue)=>{
+// //             return{ 
+// //                 ...lastValue,
+// //                 [name]:value
+// //             }
+
+// //         });
+// //     }
+
+// //     const submitForm=(e)=>{ 
+// //         e.preventDefault();
+// //         setwarnname(false);
+// //         setwarnemail(false);
+// //         setwarnpassword(false);
+// //         if(inputtext.name==""){
+// //             setwarnname(true);
+// //         }
+// //         else if(inputtext.email==""){
+// //             setwarnemail(true);
+// //         }
+// //         else if(inputtext.password==""){
+// //             setwarnpassword(true);
+// //         }
+// //         else{
+// //             alert("form has been successfully submitted");
+// //         }
+// //     }
+
+
+// //     const Tick=()=>{
+// //     if(tick==true){
+// //     settick(false);
+// //     }
+// //     else{ 
+// //     settick(true);
+// //     }
+// //     }
+
+
+
+// //     const Eye=()=>{
+// //         if(passtype=="password"){
+// //             setpasstype("text"); 
+// //             seteye(false);
+// //             setpassred(true);
+// //         }
+// //         else{
+// //             setpasstype("password");
+// //             seteye(true);
+// //             setpassred(false);
+// //         }
+// //     }
+
+
+// //     return(
+// //     <>
+// //         <div className="container">
+// //             <div className="card"> 
+// //                 <div className="top_part">
+// //                     <h3><i>Start a 7-Day Free Trial</i> </h3> 
+// //                     <h5>No credit card required.Access all our features! Already ahve an account? <a href="#">Signin</a> </h5>
+// //                 </div>
+
+// //                 <form onSubmit={submitForm}>   
+
+// //                 <div className="input_text">
+// //                     <input type="text" className={` ${warnname ? "warning" : " " }`} name="name" value={inputtext.name} onChange={inputEvent}  /> 
+// //                     <label>Your Name</label>
+// //                 </div>
+// //                 <div className="input_text">
+// //                     <input type="text"  className={` ${warnemail ? "warning" : " " }`}  name="email" value={inputtext.email} onChange={inputEvent}   />
+// //                     <label>Email address</label>
+// //                 </div> 
+// //                 <div className="input_text">
+// //                     <input type={passtype}  className={` ${warnpassword ? "warning" : " " } ${passred ? "passwarning" : ""}`}   name="password" value={inputtext.password} onChange={inputEvent}   />
+// //                     <label>Password</label>
+// //                     <i  onClick={Eye} className={`fa ${eye ? "fa-eye-slash" : "fa-eye" } ${none ? "d-none" : ""}`}></i>
+// //                 </div>
+// //                 <div className="tandc">
+// //                     <div className="terms">
+// //                         <span onClick={Tick} className={` ${tick ? "tick" : "" }`}><i className="fa fa-check"></i></span> 
+// //                         <h5>Accept our terms<br /> and conditions</h5>
+// //                     </div>
+// //                     <button type="submit">Sign Up</button>
+// //                 </div>
+
+// //                 </form>
+
+// //                 <div className="copyright">
+// //                     <i className="fa fa-copyright"></i>
+// //                     <h5>Copyright 2003-2019</h5>
+// //                 </div>
+// //             </div>
+
+// //         </div>
+
+// //     </>
+
+// //     );
+// //     }
+// //     export default LoginForm
+// //     // ReactDOM.render(
+// //     // <LoginForm />,document.getElementById("root"));
+
+
+
+// import React from 'react'
+// import { Grid, Paper, Avatar, TextField, Button, Typography, Link } from '@material-ui/core'
+// // import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+// import FormControlLabel from '@material-ui/core/FormControlLabel';
+// import Checkbox from '@material-ui/core/Checkbox';
+// const Login = ({ handleChange }) => {
+
+//     const paperStyle = { padding: 20, height: '73vh', width: 300, margin: "0 auto" }
+//     const avatarStyle = { backgroundColor: '#1bbd7e' }
+//     const btnstyle = { margin: '8px 0' }
+//     return (
+//         <Grid className="loginedit">
+//             <Paper style={paperStyle}>
+//                 <Grid align='center'>
+//                     <Avatar style={avatarStyle}>
+//                         {/* <LockOutlinedIcon/> */}
+//                     </Avatar>
+//                     <h2>Sign In</h2>
+//                 </Grid>
+//                 <TextField label='Username' placeholder='Enter username' fullWidth required />
+//                 <TextField label='Password' placeholder='Enter password' type='password' fullWidth required />
+//                 <FormControlLabel
+//                     control={
+//                         <Checkbox
+//                             name="checkedB"
+//                             color="primary"
+//                         />
+//                     }
+//                     label="Remember me"
+//                 />
+
+// <Button  type='submit' color='primary' variant="contained" style={btnstyle} fullWidth>
+//     <Link to={'/epp'} >
+//         Sign in
+//     </Link>
+//                 </Button>
+//                 <Typography >
+//                     <Link href="#" >
+//                         Forgot password ?
+//                     </Link>
+//                 </Typography>
+//                 <Typography > Do you have an account ?
+//                     <Link to={"register"} onClick={() => handleChange("event", 1)} >
+//                         Sign Up
+//                     </Link>
+//                 </Typography>
+//             </Paper>
+//         </Grid>
+//     )
+// }
+
+// export default Login
+
+import React, { useState, useEffect } from "react";
+import {Button , Link, } from '@material-ui/core'
+// import basestyle from "../Base.module.css";
+// import loginstyle from "./Login.module.css";
+import axios from "axios";
+import { useNavigate, useHistory } from 'react-router-dom'
+import { NavLink } from "react-router-dom";
+const Login = ({ setUserState }) => {
+    //   const navigate = useNavigate();
+    const history = useHistory();
+    const [formErrors, setFormErrors] = useState({});
+    const [isSubmit, setIsSubmit] = useState(false);
+    const [user, setUserDetails] = useState({
+        email: "",
+        password: "",
+    });
+
+    const changeHandler = (e) => {
+        const { name, value } = e.target;
+        setUserDetails({
+            ...user,
+            [name]: value,
+        });
     };
 
-    handleEmailChange = event => {
-        this.setState({email: event.target.value});
-    };
-    handlePwdChange = event => {
-        this.setState({password: event.target.value});
-    };
-
-    handleSubmit = event => {
-        event.preventDefault();
-        this.setState({isLoading: true});
-        const url = 'https://gowtham-rest-api-crud.herokuapp.com/login';
-        const email = this.state.email;
-        const password = this.state.password;
-        let bodyFormData = new FormData();
-        bodyFormData.set('email', email);
-        bodyFormData.set('password', password);
-        axios.post(url, bodyFormData)
-            .then(result => {
-                if (result.data.status) {
-                    localStorage.setItem('token', result.data.token);
-                    this.setState({redirect: true, isLoading: false});
-                    localStorage.setItem('isLoggedIn', true);
-                }
-            })
-            .catch(error => {
-                console.log(error);
-                this.setState({authError: true, isLoading: false});
-            });
-    };
-
-    componentDidMount() {
-        const url = 'https://freegeoip.app/json/';
-        axios.get(url)
-            .then(response => {
-                const location = response.data;
-                this.setState({ location });
-            }) 
-            .catch(error => {
-                this.setState({ toDashboard: true });
-                console.log(error);
-            });
-    }
-
-    renderRedirect = () => {
-        if (this.state.redirect) {
-            return <Redirect to='/dashboard'/>
+    const validateForm = (values) => {
+        const error = {};
+        const regex = /^[^\s+@]+@[^\s@]+\.[^\s@]{2,}$/i;
+        if (!values.email) {
+            error.email = "Email is required";
+        } else if (!regex.test(values.email)) {
+            error.email = "Please enter a valid email address";
         }
+        if (!values.password) {
+            error.password = "Password is required";
+        }
+        return error;
     };
 
-    render() {
-        const isLoading = this.state.isLoading;
-        return (
-            <div className="container">
-                <TitleComponent title="React CRUD Login "></TitleComponent>
-                <div className="card card-login mx-auto mt-5">
-                    <div className="card-header">Login</div>
-                   
-                    <div className="card-body">
-                        <form onSubmit={this.handleSubmit}>
-                            <div className="form-group">
-                                <div className="form-label-group">
-                                    <input className={"form-control " + (this.state.authError ? 'is-invalid' : '')} id="inputEmail" placeholder="Email address" type="text" name="email" onChange={this.handleEmailChange} autoFocus required/>
-                                    <label htmlFor="inputEmail">Email address</label>
-                                    <div className="invalid-feedback">
-                                        Please provide a valid Email.
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="form-group">
-                                <div className="form-label-group">
-                                    <input type="password" className={"form-control " + (this.state.authError ? 'is-invalid' : '')} id="inputPassword" placeholder="******" name="password" onChange={this.handlePwdChange} required/>
-                                    <label htmlFor="inputPassword">Password</label>
-                                    <div className="invalid-feedback">
-                                        Please provide a valid Password.
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="form-group">
-                                <div className="checkbox">
-                                    <label>
-                                        <input type="checkbox" value="remember-me"/>Remember Password
-                                    </label>
-                                </div>
-                            </div>
-                            <div className="form-group">
-                                <button className="btn btn-primary btn-block" type="submit" disabled={this.state.isLoading ? true : false}>Login &nbsp;&nbsp;&nbsp;
-                                    {isLoading ? (
-                                        <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                    ) : (
-                                        <span></span>
-                                    )}
-                                </button>
-                            </div>
-                            <div className="form-group">
-                                <div className="form-group">
-                                    <b>email:</b> mishrabhola368@gmail.com
-                                </div>
-                                <div className="form-group">
-                                    <b>password :</b> password
-                                </div>
-                            </div>
-                        </form>
-                        <div className="text-center">
-                            <Link className="d-block small mt-3" to={'register'}>Register an Account</Link>
-                            <a className="d-block small" href="forgot-password.html">Forgot Password?</a>
-                        </div>
-                    </div>
-                </div>
-                {this.renderRedirect()}
-            </div>
-        );
-    }
-}
+    const loginHandler = (e) => {
+        e.preventDefault();
+        setFormErrors(validateForm(user));
+        setIsSubmit(true);
+        // if (!formErrors) {
+
+        // }
+    };
+
+    useEffect(() => {
+        if (Object.keys(formErrors).length === 0 && isSubmit) {
+            console.log(user);
+            axios.post(" ", user).then((res) => {
+                alert(res.data.message);
+                setUserState(res.data.user);
+                history("/", { replace: true });
+            });
+        }
+    }, [formErrors]);
+    return (
+        <div
+            className='login'
+        >
+            <form>
+                <h1>Login</h1>
+                <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="Email"
+                    onChange={changeHandler}
+                    value={user.email}
+                />
+                <p
+                // className={basestyle.error}
+                >{formErrors.email}</p>
+                <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="Password"
+                    onChange={changeHandler}
+                    value={user.password}
+                />
+                <p
+                // className={basestyle.error}
+                >{formErrors.password}</p>
 
 
+                <Button type='submit' color='primary' variant="contained" onClick={loginHandler} fullWidth>
+                    {/* <Link to='/epp' >
+                        Sign in
+                    </Link> */}
+                    <NavLink to="/epp" color="white" >Signin</NavLink>
+                    </Button>
+                    {/* <button
+                         className={basestyle.button_common}
+                        onClick={loginHandler}>
+                        Login
+                    </button> */}
+            </form>
+            <NavLink to="/register">Not yet registered?  Register Now</NavLink>
+        </div>
+    );
+};
+export default Login;

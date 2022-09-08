@@ -1,111 +1,220 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import {Link, Redirect} from 'react-router-dom';
+// import React from 'react'
+// import { Grid, Paper, Avatar, Typography, TextField, Button } from '@material-ui/core'
+// // import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
+// import Radio from '@material-ui/core/Radio';
+// import RadioGroup from '@material-ui/core/RadioGroup';
+// import FormControlLabel from '@material-ui/core/FormControlLabel';
+// import FormControl from '@material-ui/core/FormControl';
+// import FormLabel from '@material-ui/core/FormLabel';
+// import Checkbox from '@material-ui/core/Checkbox';
+// const Signup = () => {
+//     const paperStyle = { padding: 20, width: 300, margin: "0 auto" }
+//     const headerStyle = { margin: 0 }
+//     const avatarStyle = { backgroundColor: '#1bbd7e' }
+//     const marginTop = { marginTop: 5 }
+//     return (
+//         <div >
+//         <Grid className="registernew">
+//             <Paper style={paperStyle}>
+//                 <Grid align='center'>
 
-export default class Register extends Component {
+//                     <Avatar style={avatarStyle}>
+//                         {/* <AddCircleOutlineOutlinedIcon /> */}
+//                     </Avatar>
+//                     <img src="pages/logo.jpg" alt="Logo" width="300" height="600"></img>
+//                     <h2 style={headerStyle}>Sign Up</h2>
+//                     <Typography variant='caption' gutterBottom>Don't have an account? Create your own account, it takes less than a minute</Typography>
+//                 </Grid>
+//                 <form>
+//                     <TextField fullWidth label='Name' placeholder="Enter your name" />
+//                     <br />
+//                     <TextField fullWidth label='Email' placeholder="Enter your email" />
+//                     <br />
+//                     {/* <FormControl component="fieldset" style={marginTop}>
+//                         <FormLabel component="legend">Gender</FormLabel>
+//                         <RadioGroup aria-label="gender" name="gender" style={{ display: 'initial' }}>
+//                             <FormControlLabel value="female" control={<Radio />} label="Female" />
+//                             <FormControlLabel value="male" control={<Radio />} label="Male" />
+//                         </RadioGroup>
+//                     </FormControl> */}
+//                     <TextField fullWidth type="num" label='Phone Number' placeholder="Enter your phone number" />
+//                     <br />
+//                     <TextField fullWidth type="password" label='Password' placeholder="Enter your password" />
+//                     <br />
+//                     <TextField fullWidth type="password" label='Confirm Password' placeholder="Confirm your password" />
+//                     <br />
+//                     <br />
+//                     <FormControlLabel
+//                         control={<Checkbox name="checkedA" />}
+//                         label="I accept the terms and conditions."
+//                     />
 
-    state = {
-        name: '',
-        email: '',
-        password: '',
-        redirect: false,
-        authError: false,
-        isLoading: false,
+//                     <Button to={"login"} className="btn btn-primary btn-lg btn-block" style={{ margin: '1px' }} type='submit' variant='contained' color='primary'>
+//                         Sign up
+//                     </Button>
+//                 </form>
+//             </Paper>
+//         </Grid>
+//         </div>
+//     )
+// }
+
+// export default Signup;
+
+import React, { useEffect, useState } from "react";
+// import basestyle from "../Base.module.css";
+// import registerstyle from "./Register.module.css";
+import { Button, Link, } from '@material-ui/core'
+import axios from "axios";
+import { useNavigate, useHistory } from 'react-router-dom'
+import { NavLink } from "react-router-dom";
+const Register = () => {
+    //   const navigate = useNavigate();
+    const history = useHistory();
+
+    const [formErrors, setFormErrors] = useState({});
+    const [isSubmit, setIsSubmit] = useState(false);
+    const [user, setUserDetails] = useState({
+        fname: "",
+        lname: "",
+        email: "",
+        password: "",
+        cpassword: "",
+    });
+
+    const changeHandler = (e) => {
+        const { name, value } = e.target;
+        setUserDetails({
+            ...user,
+            [name]: value,
+        });
     };
 
-    handleEmailChange = event => {
-        this.setState({ email: event.target.value });
-    };
-    handlePwdChange = event => {
-        this.setState({ password: event.target.value });
-    };
-    handleNameChange = event => {
-        this.setState({ name: event.target.value });
-    };
-
-    handleSubmit = event => {
-        event.preventDefault();
-        this.setState({isLoading: true});
-        const url = 'https://gowtham-rest-api-crud.herokuapp.com/register';
-        const email = this.state.email;
-        const password = this.state.password;
-        const name = this.state.name;
-        let bodyFormData = new FormData();
-        bodyFormData.set('email', email);
-        bodyFormData.set('name', name);
-        bodyFormData.set('password', password);
-        axios.post(url, bodyFormData)
-            .then(result => {
-                this.setState({isLoading: false});
-                if (result.data.status !== 'fail') {
-                    this.setState({redirect: true, authError: true});
-                }else {
-                    this.setState({redirect: false, authError: true});
-                }
-            })
-            .catch(error => {
-                console.log(error);
-                this.setState({ authError: true, isLoading: false });
-            });
-    };
-
-    renderRedirect = () => {
-        if (this.state.redirect) {
-            return <Redirect to="/" />
+    const validateForm = (values) => {
+        const error = {};
+        const regex = /^[^\s+@]+@[^\s@]+\.[^\s@]{2,}$/i;
+        if (!values.fname) {
+            error.fname = "First Name is required";
         }
+        if (!values.lname) {
+            error.lname = "Last Name is required";
+        }
+        if (!values.email) {
+            error.email = "Email is required";
+        } else if (!regex.test(values.email)) {
+            error.email = "This is not a valid email format!";
+        }
+        if (!values.password) {
+            error.password = "Password is required";
+        } else if (values.password.length < 4) {
+            error.password = "Password must be more than 4 characters";
+        } else if (values.password.length > 10) {
+            error.password = "Password cannot exceed more than 10 characters";
+        }
+        if (!values.cpassword) {
+            error.cpassword = "Confirm Password is required";
+        } else if (values.cpassword !== values.password) {
+            error.cpassword = "Confirm password and password should be same";
+        }
+        return error;
+    };
+    const signupHandler = (e) => {
+        e.preventDefault();
+        setFormErrors(validateForm(user));
+        setIsSubmit(true);
+        // if (!formErrors) {
+        //   setIsSubmit(true);
+        // }
     };
 
-    render() {
-        const isLoading = this.state.isLoading;
-        return (
-            <div className="container">
-                <div className="card card-login mx-auto mt-5">
-                    <div className="card-header">Register</div>
-                    <div className="card-body">
-                        <form onSubmit={this.handleSubmit}>
-                            <div className="form-group">
-                                <div className="form-label-group">
-                                    <input type="text" id="inputName" className="form-control" placeholder="name"  name="name" onChange={this.handleNameChange} required/>
-                                    <label htmlFor="inputName">Name</label>
-                                </div>
-                            </div>
-
-                            <div className="form-group">
-                                <div className="form-label-group">
-                                    <input id="inputEmail" className={"form-control " + (this.state.authError ? 'is-invalid' : '')} placeholder="Email address" type="text" name="email" onChange={this.handleEmailChange} autoFocus required/>
-                                    <label htmlFor="inputEmail">Email address</label>
-                                    <div className="invalid-feedback">
-                                        Please provide a valid Email. or Email Exis
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="form-group">
-                                <div className="form-label-group">
-                                    <input type="password" className="form-control" id="inputPassword" placeholder="******"  name="password" onChange={this.handlePwdChange} required/>
-                                    <label htmlFor="inputPassword">Password</label>
-                                </div>
-                            </div>
-
-                            <div className="form-group">
-                                <button className="btn btn-primary btn-block" type="submit" disabled={this.state.isLoading ? true : false}>Register &nbsp;&nbsp;&nbsp;
-                                    {isLoading ? (
-                                        <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                    ) : (
-                                        <span></span>
-                                    )}
-                                </button>
-                            </div>
-                        </form>
-                        <div className="text-center">
-                            <Link className="d-block small mt-3" to={''}>Login Your Account</Link>
-                            <Link className="d-block small" to={'#'}>Forgot Password?</Link>
-                        </div>
-                    </div>
-                </div>
-                {this.renderRedirect()}
+    useEffect(() => {
+        if (Object.keys(formErrors).length === 0 && isSubmit) {
+            console.log(user);
+            axios.post(" ", user).then((res) => {
+                alert(res.data.message);
+                history("/login", { replace: true });
+            });
+        }
+    }, [formErrors]);
+    return (
+        <>
+            <div
+                className='register'
+            >
+                <form>
+                    <h4>Epp</h4>
+                    <h6>Create your account</h6>
+                    <input
+                        type="text"
+                        name="fname"
+                        id="fname"
+                        placeholder="First Name"
+                        onChange={changeHandler}
+                        value={user.fname}
+                    />
+                    <p
+                    //   className={basestyle.error}
+                    >{formErrors.fname}</p>
+                    <input
+                        type="text"
+                        name="lname"
+                        id="lname"
+                        placeholder="Last Name"
+                        onChange={changeHandler}
+                        value={user.lname}
+                    />
+                    <p
+                    //    className={basestyle.error}
+                    >{formErrors.lname}</p>
+                    <input
+                        type="email"
+                        name="email"
+                        id="email"
+                        placeholder="Email"
+                        onChange={changeHandler}
+                        value={user.email}
+                    />
+                    <p
+                    //   className={basestyle.error}
+                    >{formErrors.email}</p>
+                    <input
+                        type="password"
+                        name="password"
+                        id="password"
+                        placeholder="Password"
+                        onChange={changeHandler}
+                        value={user.password}
+                    />
+                    <p
+                    //   className={basestyle.error}
+                    >{formErrors.password}</p>
+                    <input
+                        type="password"
+                        name="cpassword"
+                        id="cpassword"
+                        placeholder="Confirm Password"
+                        onChange={changeHandler}
+                        value={user.cpassword}
+                    />
+                    <p
+                    //   className={basestyle.error}
+                    >{formErrors.cpassword}</p>
+                    <Button type='submit' color='primary' variant="contained" onClick={signupHandler} fullWidth>
+                        {/* <Link to='/epp' >
+                        Sign in
+                    </Link> */}
+                        <NavLink to="/epp" color="white" >SignUP</NavLink>
+                    </Button>
+                    {/* <button 
+          className={basestyle.button_common}
+           onClick={signupHandler}>
+            Register
+          </button> */}
+                </form>
+                <NavLink to="/login">Already registered? Login</NavLink>
             </div>
-        );
-    }
-}
-
-
+        </>
+    );
+};
+export default Register;
+// Footer
