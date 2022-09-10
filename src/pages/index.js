@@ -49,9 +49,7 @@ const Index = () => {
                                                 <td>{employees.company}</td>
                                                 <td>{employees.location}</td>
                                                 <td className="text-center">
-                                                    {/* <Link className="btn btn-sm btn-info" to={{ pathname: 'edit', search: '?id=' + employees.id }}>Edit</Link> */}
                                                     &nbsp; | &nbsp;
-                                                    {/* <button value={employees.id} className="btn btn-sm btn-danger" disabled={ index === 0  ? true : false} onClick={this.handleClickDelete} >Delete</button> */}
                                                 </td>
                                             </tr>)
                                         }
@@ -61,7 +59,6 @@ const Index = () => {
                             <div className="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

@@ -1,4 +1,3 @@
-// import React, { useState, Paper } from 'react';
 import Header from "../elements/header";
 import Sidebar from "../elements/sidebar";
 import { Link, button, useHistory } from 'react-router-dom';
@@ -32,11 +31,9 @@ export default function StickyHeadTable() {
 
     const history = useHistory();
     const [UsersubscriptionMainID, setUsersubscriptionMainID] = useState("");
-
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
@@ -47,70 +44,20 @@ export default function StickyHeadTable() {
     };
 
     const [data, setData] = useState([]);
-    //    const handleDelete = this.props.onDelete(this.props.searchItem);
-    // handle for pagination data
-
-
     React.useEffect(() => {
-        // axios.get(`https://qaapi.jahernotice.com/api/EPP`).then((response) => {
         axios.get(`https://qaapi.jahernotice.com/api/auction/subscriber/view?`).then((response) => {
             setData(response.data.data);
             console.log("Bhola", response.data.data)
-            // console.log("date"+response.startDate)
         });
     }, []);
 
-  
-
-    // const [endDate, setendDate] = useState("");
-
-    // const [startDate, setstartDate] = useState("");
-
-    // const [UserSubscriptionMainID, setUserSubscriptionMainID] = useState("");
-
-    // function selectUser(UserSubscriptionMainID)
-    // {
-    //   data = classes[UserSubscriptionMainID-1];
-    //   setstartDate(data.startDate)
-    //       setendDate(data.endDate)
-    //     //   setMobile(data.mobile);
-    //       setUserSubscriptionMainID(data.UserSubscriptionMainID)
-    // }
-    // function updateUser()
-    // {
-    //   let data={startDate,endDate,}
-    //   console.warn("data",data)
-    //   fetch(`http://localhost:4000/todo/${UserSubscriptionMainID}`, {
-    //     method: 'PUT',
-    //     headers:{
-    //       'Accept':'application/json',
-    //       'Content-Type':'application/json'
-    //     },
-    //     body:JSON.stringify(data)
-    //   }).then((result) => {
-    //     result.json().then((resp) => {
-    //       console.warn(resp)
-    //       UserSubscriptionMainID()
-    //     })
-    //   })
-    // }
-
-
-
     const onddlChange = (e) => {
-        // alert(e.target.value);
-
         axios.put('https://qaapi.jahernotice.com/api/auction/update/71' + e.target.value).then((response) => {
             setData(response.data.data);
             console.log("Taluka", response.data.data)
 
         });
     }
-
-
-    // const editrow = (e) => {
-    //     console.log(e)
-
 
 
     return (
@@ -121,9 +68,8 @@ export default function StickyHeadTable() {
                     <Sidebar></Sidebar>
                     <div id="content-wrapper">
                         <div className="container-fluid">
-                            {/* <ol className="breadcrumb"> */}
                             <Paper sx={{ width: "200%", mb: 0 }}>
-                            <ol className="breadcrumb">
+                                <ol className="breadcrumb">
                                     <li><h6 className="EPPDite2">Auction Ditel</h6></li>
                                     <li className="breadcrumb-itemac">
                                         <Link className="bread" to={'/dashboard'} >Dashboard</Link>
@@ -131,20 +77,13 @@ export default function StickyHeadTable() {
                                     <li className="breadcrumb-item active">Overview</li>
                                 </ol>
                                 <div className="AddEpp" style={{ border: 'none', color: 'revert' }}>
-                                    {/* <ul className="nav nav-tabs nav-justified"> */}
-                                    {/* <button className="btn btn-primary tg  "><Link to={"/eppnewadd"} style={{ border: 'none', color: 'white' }}>Add New APP</Link></button>
-                                        <button className="btn btn-primary ta "><Link to={"/eppnewadd1"} style={{ border: 'none', color: 'white' }}>Add Exiting EPP</Link></button> */}
                                     <Button className="btn btn-primary tg " id="addd3" variant="contained" color="primary">
                                         <Link variant="contained" color="primary" to={"/auctionadd"} style={{ border: 'none', color: 'white' }}>Add New Auction</Link>
                                     </Button>
-                                    {/* </ul> */}
                                 </div>
                                 <br />
-                                {/* <div>Hello</div> */}
-                                {/* <br /> */}
                                 <form>
                                     <div className="tb-table-table" style={{ color: '', border: '1px' }}>
-
                                         <Button className="btn btn-primary btn-lg " variant="contained" color="primary">
                                             ALL
                                         </Button>
@@ -158,7 +97,6 @@ export default function StickyHeadTable() {
                                         <Button className="btn3 btn-lg  " style={{ border: 'none' }} variant="contained" color="primary">
                                             <Link className='NAV font-weight-bold' variant="contained" color="primary" to={"/next"} style={{ border: 'none', color: 'blac' }}>Next-Month</Link>
                                         </Button>
-
                                     </div>
                                 </form>
                                 <form className='contenar'>
@@ -202,10 +140,6 @@ export default function StickyHeadTable() {
                                             </div>
                                         </form>
                                     </>
-                                    {/* <br /> */}
-
-                                    {/* <br /> */}
-
                                     <TableContainer component={Paper}>
                                         <Table
                                             sx={{ minWidth: 650 }}
@@ -215,15 +149,11 @@ export default function StickyHeadTable() {
                                         >
                                             <TableHead>
                                                 <TableRow>
-
                                                     <TableCell>Sr.No</TableCell>
                                                     <TableCell>UserName</TableCell>
-                                                    {/* <TableCell>LastName</TableCell> */}
                                                     <TableCell>MobileNo</TableCell>
                                                     <TableCell>EmailID</TableCell>
-                                                    {/* <TableCell>UserID</TableCell> */}
                                                     <TableCell>ActionFor</TableCell>
-                                                    {/* <TableCell>group_id</TableCell> */}
                                                     <TableCell>start_date</TableCell>
                                                     <TableCell> end_date</TableCell>
                                                     <TableCell>Action</TableCell>
@@ -238,38 +168,21 @@ export default function StickyHeadTable() {
                                                             sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                                                         >
                                                             <TableCell>{index + 1}</TableCell>
-                                                            {/* <TableCell>{data.FirstName} {data.LastName}</TableCell> */}
                                                             <TableCell>{data.UserName}</TableCell>
                                                             <TableCell>{data.MobileNo}</TableCell>
                                                             <TableCell>{data.EmailID}</TableCell>
-                                                            {/* <TableCell>{data.group_id}</TableCell> */}
-                                                            {/* <TableCell>{data.UserID}</TableCell> */}
                                                             <TableCell>{data.ActionFor}</TableCell>
                                                             <TableCell>{moment(data.start_date).format("MMM/DD/YYYY")}</TableCell>
                                                             <TableCell>{moment(data.end_date).format("MMM/DD/YYYY")}</TableCell>
                                                             <TableCell>
                                                                 <div class="row">
-                                                                    {/*  <Link onClick={editrow(data)} to={'/auctiont2'} style={{ border: 'none', color: 'black' }}>
-                                                                    <i class="bi bi-box-arrow-in-down-left">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-down-left" viewBox="0 0 16 16">
-                                                                            <path fill-rule="evenodd" d="M9.636 2.5a.5.5 0 0 0-.5-.5H2.5A1.5 1.5 0 0 0 1 3.5v10A1.5 1.5 0 0 0 2.5 15h10a1.5 1.5 0 0 0 1.5-1.5V6.864a.5.5 0 0 0-1 0V13.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z" />
-                                                                            <path fill-rule="evenodd" d="M5 10.5a.5.5 0 0 0 .5.5h5a.5.5 0 0 0 0-1H6.707l8.147-8.146a.5.5 0 0 0-.708-.708L6 9.293V5.5a.5.5 0 0 0-1 0v5z" />
-                                                                        </svg></i>
-                                                                </Link></div> */}
                                                                     <div class="col-1" style={{ bold: '2' }}>
-
-                                                                        {/* <Link className="Di-Boxa" to={"/eppt2"} style={{ border: 'none', color: 'black' }}>
-                                                                        <i class="bi bi-plus" >
-                                                                            <svg className="Di-Boxa" to={"/eppt2"} width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-                                                                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                                                                            </svg></i></Link> */}
-
                                                                         <div class="col-1" style={{ bold: '2' }}>
                                                                             <Button className="Submiticone " onClick={() => {
                                                                                 history.push('/auctiont2', {
                                                                                     startDate: moment(data.start_date).format("YYYY-MM-DD"),
                                                                                     endDate: moment(data.end_date).format("YYYY-MM-DD"),
-                                                                                    UserSubscriptionMainID:(data.UserSubscriptionMainID),
+                                                                                    UserSubscriptionMainID: (data.UserSubscriptionMainID),
                                                                                 })
                                                                             }}>
                                                                                 <i class="bi bi-box-arrow-in-down-left font-weight-bold">
@@ -278,20 +191,6 @@ export default function StickyHeadTable() {
                                                                                         <path fill-rule="evenodd" d="M5 10.5a.5.5 0 0 0 .5.5h5a.5.5 0 0 0 0-1H6.707l8.147-8.146a.5.5 0 0 0-.708-.708L6 9.293V5.5a.5.5 0 0 0-1 0v5z" />
                                                                                     </svg></i>
                                                                             </Button>
-                                                                            {/* <Link className="btn btn-sm btn-info" onClick={() => selectUser(data.UserSubscriptionMainID)} to={{ pathname: '/auctiont2', search: '?id=' + data.UserSubscriptionMainID }}>edit</Link> */}
-                                                                            {/* <Link onClick={() => {
-                                                                                history.push('/auctiont2', {
-                                                                                    startDate: moment(data.start_date).format("YYYY-MM-DD"),
-                                                                                    endDate: moment(data.end_date).format("YYYY-MM-DD")
-                                                                                })
-                                                                            }}>
-                                                                                <i class="bi bi-box-arrow-in-down-left">
-                                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-down-left" viewBox="0 0 16 16">
-                                                                                        <path fill-rule="evenodd" d="M9.636 2.5a.5.5 0 0 0-.5-.5H2.5A1.5 1.5 0 0 0 1 3.5v10A1.5 1.5 0 0 0 2.5 15h10a1.5 1.5 0 0 0 1.5-1.5V6.864a.5.5 0 0 0-1 0V13.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z" />
-                                                                                        <path fill-rule="evenodd" d="M5 10.5a.5.5 0 0 0 .5.5h5a.5.5 0 0 0 0-1H6.707l8.147-8.146a.5.5 0 0 0-.708-.708L6 9.293V5.5a.5.5 0 0 0-1 0v5z" />
-                                                                                    </svg></i>
-                                                                            </Link> */}
-
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -301,7 +200,6 @@ export default function StickyHeadTable() {
                                             </TableBody>
                                         </Table>
                                     </TableContainer>
-                                    {/* table pagination */}
                                     <TablePagination
                                         rowsPerPageOptions={[5, 10, 25, 50, 100]}
                                         component="div"
@@ -313,13 +211,11 @@ export default function StickyHeadTable() {
                                     />
                                 </form>
                             </Paper>
-                            {/* </ol> */}
                         </div>
                     </div>
                 </div>
             </div>
-
         </>
     );
 };
-// export default Dashboard
+

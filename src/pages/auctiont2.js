@@ -30,16 +30,11 @@ const Auctiont2 = () => {
     const [UserSubscriptionMainID, setUserSubscriptionMainID] = useState("");
     const [group_id, setGroup_id] = useState("");
     const [survey_number, setSurvey_number] = useState("");
-    
+
     const [UsersubscriptionMainID, setUsersubscriptionMainID] = useState(location.state.UserSubscriptionMainID);
     const [UserName, setUserName] = useState("");
-    
-    const [data, setData] = useState([]);
-    //    const handleDelete = this.props.onDelete(this.props.searchItem);
-    // handle for pagination data
 
-    // const [data, setData] = useState([]);
-    // data:[{UsersubscriptionMainID}],
+    const [data, setData] = useState([]);
 
     React.useEffect(() => {
         axios.get(` https://qaapi.jahernotice.com/api/auction/subscriber/view/${UsersubscriptionMainID}`).then((response) => {
@@ -47,10 +42,10 @@ const Auctiont2 = () => {
             console.log("Bhola", response.data.data)
         });
     }, []);
-   
+
     function updateUser() {
-        let data = { startDate, UsersubscriptionMainID, endDate } 
-        console.warn("data", data , id)
+        let data = { startDate, UsersubscriptionMainID, endDate }
+        console.warn("data", data, id)
         fetch(`https://qaapi.jahernotice.com/api/auction/update/${UsersubscriptionMainID}`, {
             method: 'PUT',
             headers: {
@@ -67,9 +62,6 @@ const Auctiont2 = () => {
     }
 
 
-    
-
-
     return (
         <>
             <div>
@@ -78,7 +70,7 @@ const Auctiont2 = () => {
                     <Sidebar></Sidebar>
                     <div id="content-wrapper">
 
-                    <div className="container-fluid">
+                        <div className="container-fluid">
                             <ol className="breadcrumb">
                                 <div className="container-fluid">
                                     <ol className="breadcrumb">
@@ -89,9 +81,6 @@ const Auctiont2 = () => {
                                         <li className="breadcrumb-item active">Overview</li>
                                     </ol>
                                 </div>
-
-                                {/* <p>{location.state.name}</p>
-                                <p>{location.state.age}</p> */}
                                 <div className="form-group s ">
                                     <label for="usr"> startDate</label>
                                     <input type="date" name=" startDate" value={startDate} onChange={(e) => { setstartDate(e.target.value) }
@@ -103,12 +92,10 @@ const Auctiont2 = () => {
                                     <input type="date" name=" endDate" value={endDate} onChange={(e) => { setendDate(e.target.value) }} class="form-control" id="usr" placeholder=" endDate" required />
                                 </div>
                                 <div className="form-group s " >
-                                    <Button onClick={  handleShow} className="btn btn-primary btn-lg btn-block" style={{ margin: '1px' }} variant="contained" color="primary">
+                                    <Button onClick={handleShow} className="btn btn-primary btn-lg btn-block" style={{ margin: '1px' }} variant="contained" color="primary">
                                         Add
                                     </Button>
-
                                 </div>
-
                                 <Modal
                                     show={show}
                                     onHide={handleClose}
@@ -116,36 +103,26 @@ const Auctiont2 = () => {
                                     keyboard={false}
                                     className="cardtop"
                                 >
-                                    {/* <Modal.Header closeButton> */}
-                                    {/* <Modal.Title>Modal title</Modal.Title>                                         */}
-                                    {/* </Modal.Header> */}
                                     <CheckCircleOutlineSharpIcon fontSize="large" className='right'></CheckCircleOutlineSharpIcon>
                                     <h4 className='cantentbox'>User Auction Updated</h4>
                                     <h6 className='cantentbo'>Data Updated Sucesfully</h6>
-                                    {/* <Modal.Footer> */}
                                     <div class="row justify-content-md-center rowend">
                                         <div class="col col-lg-2">
                                             <Button className='secondaryclose' onClick={updateUser} variant="primary" color="primary">
                                                 <Link to={'/auction'}>Yes</Link></Button>
                                         </div>
-
                                         <div class="col col-lg-2">
                                             <Button className='secondaryclosebutton' variant="secondary" onClick={handleClose}>
                                                 No
                                             </Button>
                                         </div>
                                     </div>
-
-
-                                    {/* </Modal.Footer> */}
                                 </Modal>
-
                             </ol>
                         </div>
                     </div>
                 </div>
             </div>
-
         </>
     );
 }

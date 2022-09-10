@@ -30,9 +30,9 @@ const Header = () => {
 
     return (
         <nav className="navbar navbar-expand navbar-dark bg-dark static-top">
-            <div className={classes.root}>
+            {/* <div className={classes.root}>
                 <Avatar alt="Bemy Sharp" src="" />
-            </div>
+            </div> */}
 
             <TitleComponent title="EPP Module"></TitleComponent>
             <FormatAlignJustifyIcon className='hemb'>

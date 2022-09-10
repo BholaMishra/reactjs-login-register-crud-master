@@ -27,7 +27,6 @@ const NotFound = () => {
                             to the previous page, or
                             <Link to={'/dashboard'}>return home</Link>.</p>
                     </div>
-
                     <footer className="sticky-footer">
                         <div className="container my-auto">
                             <div className="copyright text-center my-auto">
@@ -40,8 +39,6 @@ const NotFound = () => {
         </div>
     );
 }
-
-
 const { string, object } = PropTypes;
 NotFound.propTypes = {
     title: string.isRequired,

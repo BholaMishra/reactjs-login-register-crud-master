@@ -1,4 +1,3 @@
-// import React, { useState, Paper } from 'react';
 import Header from "../elements/header";
 import Sidebar from "../elements/sidebar";
 import { Link, button } from 'react-router-dom';
@@ -14,7 +13,6 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-// import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
 
@@ -22,25 +20,6 @@ function createData(name, code, population, size) {
     const density = population / size;
     return { name, code, population, size, density };
 }
-
-const rows = [
-    createData('India', 'IN', 1324171354, 3287263),
-    createData('China', 'CN', 1403500365, 9596961),
-    createData('Italy', 'IT', 60483973, 301340),
-    createData('United States', 'US', 327167434, 9833520),
-    createData('Canada', 'CA', 37602103, 9984670),
-    createData('Australia', 'AU', 25475400, 7692024),
-    createData('Germany', 'DE', 83019200, 357578),
-    createData('Ireland', 'IE', 4857000, 70273),
-    createData('Mexico', 'MX', 126577691, 1972550),
-    createData('Japan', 'JP', 126317000, 377973),
-    createData('France', 'FR', 67022000, 640679),
-    createData('United Kingdom', 'GB', 67545757, 242495),
-    createData('Russia', 'RU', 146793744, 17098246),
-    createData('Nigeria', 'NG', 200962417, 923768),
-    createData('Brazil', 'BR', 210147125, 8515767),
-];
-
 const useStyles = makeStyles({
     root: {
         '& > *': {
@@ -55,8 +34,6 @@ const useStyles = makeStyles({
 
     },
 });
-
-//   const classes = useStyles();
 
 export default function StickyHeadTable() {
     const classes = useStyles();
@@ -74,28 +51,12 @@ export default function StickyHeadTable() {
 
     // All Data handle for data
     const [data, setData] = useState([]);
-    // handle for pagination data
-    //   const [page, setPage] = useState(0);
-
-    //   // handle for tables rows
-    //   const [rowsPerPage, setRowsPerPage] = useState(5);
-
-
     React.useEffect(() => {
         axios.get(`https://qaapi.jahernotice.com/api/Epp`).then((response) => {
             setData(response.data.data);
             console.log("anuj", response.data.data)
         });
     }, []);
-
-    // import React from 'react';
-
-
-
-
-
-
-
 
     return (
         <>
@@ -116,49 +77,30 @@ export default function StickyHeadTable() {
                                     {/* <ul className="nav nav-tabs nav-justified"> */}
                                     <Button className="btn btn-primary tg " id="addd" variant="contained" color="primary">
                                         <Link variant="contained" color="primary" to={"/eppnewadd"} style={{ border: 'none', color: 'white' }}>Add New Epp</Link>
-
                                     </Button>
                                     {/* <br/> */}
                                     <Button className="btn btn-primary tg " id="addd1" variant="contained" color="primary">
                                         <Link variant="contained" color="primary" to={"/eppnewadd1"} style={{ border: 'none', color: 'white' }}>Add Exiting EPP</Link>
                                     </Button>
-                                    {/* <button className="btn btn-primary tg "><Link to={"/eppnewadd"} style={{ border: 'none', color: 'white' }}>Add New APP</Link></button> */}
-                                    {/* <button className="btn btn-primary ta  "><Link to={"/eppnewadd1"} style={{ border: 'none', color: 'white' }}>Add Exiting EPP</Link></button> */}
-                                    {/* </ul> */}
                                 </div>
                                 <br /> <br /><br />
                                 <form>
-                                    <div className="tb-table-table" style={{  border: 'none' }}>
-
-                                        <Button className="btn btn-primary btn-lg "  color="primary">
-                                        <Link className='NAV font-weight-bold' variant="contained" color="primary" to={"/epp"} style={{ border: 'none', color: 'blac'}}>ALL</Link>
+                                    <div className="tb-table-table" style={{ border: 'none' }}>
+                                        <Button className="btn btn-primary btn-lg " color="primary">
+                                            <Link className='NAV font-weight-bold' variant="contained" color="primary" to={"/epp"} style={{ border: 'none', color: 'blac' }}>ALL</Link>
                                         </Button>
                                         {/* className='NAV font-weight-bold' */}
-                                        <Button className="btn1 btn-lg  " style={{ border: 'none'  }} variant="contained"  color="primary">
+                                        <Button className="btn1 btn-lg  " style={{ border: 'none' }} variant="contained" color="primary">
                                             <Link className='NAV font-weight-bold' variant="contained" color="primary" to={"/previaus"} style={{ border: 'none', color: 'blac' }}>Previous-Month</Link>
                                         </Button>
-                                        <Button className="btn2 btn-lg  " style={{ border: 'none' }}  color="primary">
+                                        <Button className="btn2 btn-lg  " style={{ border: 'none' }} color="primary">
                                             <Link className='NAV font-weight-bold' variant="contained" color="primary" to={"/this"} style={{ border: 'none', color: 'blac' }}>This-Month</Link>
                                         </Button>
-                                        <Button className="btn3 btn-lg  " style={{ border: 'none' }}  color="primary">
+                                        <Button className="btn3 btn-lg  " style={{ border: 'none' }} color="primary">
                                             <Link className='NAV font-weight-bold' variant="contained" color="primary" to={"/next"} style={{ border: 'none', color: 'blac' }}>Next-Month</Link>
                                         </Button>
-
                                     </div>
                                 </form>
-
-                                {/* <div>Hello</div> */}
-                                {/* <br /> */}
-                                {/* <form>
-                                        <div className="tb-table-table" style={{ color: '', border: '1px' }}>
-                                            <ul class="nav nav-tabs nav-justified">
-                                            <button className="btn btn-primary btn-lg " Active>ALL</button>
-                                            <button className="btn1 btn-lg  " style={{ border: 'none' }}><Link to={"/previaus"} style={{ border: 'none' }}>Previous-Month</Link></button>
-                                            <button className="btn2 btn-lg " style={{ border: 'none' }}><Link to={"/this"} style={{ border: 'none' }}>This-Month</Link></button>
-                                            <button className="btn3 btn-lg " style={{ border: 'none', text: 'bold' }}><Link to={"/next"} style={{ border: 'none' }}>Next-Month</Link></button>
-                                            </ul>
-                                        </div>
-                                    </form> */}
                                 <form className='contenar'>
                                     <>
                                         <form className="" style={{ border: '1px' }}>
@@ -210,4 +152,3 @@ export default function StickyHeadTable() {
         </>
     );
 }
-// export default Dashboard

@@ -24,7 +24,7 @@ const Auctiont2 = () => {
     const handleShow = () => setShow(true);
 
     const id = useState(location.state.userEPPSubscription
-);
+    );
 
     const [user_name, setUser_Name] = useState("");
     const [district, setdistrict] = useState(location.state.district);
@@ -33,9 +33,9 @@ const Auctiont2 = () => {
     const [survey_number, setsurvey_number] = useState(location.state.survey_number);
     const [Admin_ID, setAdmin_ID] = useState("");
     const [userEPPSubscription
-, setuserEPPSubscription
-] = useState(location.state.userEPPSubscription
-);
+        , setuserEPPSubscription
+    ] = useState(location.state.userEPPSubscription
+    );
 
     const [startDate, setstartDate] = useState("");
 
@@ -45,21 +45,23 @@ const Auctiont2 = () => {
     const [UserName, setUserName] = useState("");
 
     const [data, setData] = useState([]);
+    const [UserID, setUserID] = useState([]);
 
     React.useEffect(() => {
-        axios.get(`https://qaapi.jahernotice.com//api/EppByID/${userEPPSubscription
-}`).then((response) => {
-            setData(response.data.data);
-            console.log("Bhola", response.data.data)
-        });
+        axios.get(`https://qaapi.jahernotice.com//api/EppByID/`+` ${userEPPSubscription}`).then((response) => {
+                setData(response.data.data);
+                console.log("Bhola", response.data.data)
+            });
     }, []);
 
     function saveData() {
-        let data = {  userEPPSubscription
-, district, taluka, village, survey_number, Admin_ID } 
-        console.warn("data", data , id)
+        let data = {
+            userEPPSubscription
+            , district, taluka, village, survey_number, Admin_ID
+        }
+        console.warn("data", data, id)
         fetch(`https://qaapi.jahernotice.com/api/EditUser/${userEPPSubscription
-}`, {
+            }`, {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',
@@ -70,14 +72,10 @@ const Auctiont2 = () => {
             result.json().then((resp) => {
                 console.log(resp.data)
                 setuserEPPSubscription
-()
+                    ()
             })
         })
     }
-
-    
-
-
 
     return (
         <>
@@ -93,17 +91,11 @@ const Auctiont2 = () => {
                                         <li><h6 className="EPPDite4">Edit</h6></li>
                                         <li className="breadcrumb-itemac">
                                             <Link className="bread" to={'/eppt2'} >EPP Details By userEPPSubscription
-</Link>
+                                            </Link>
                                         </li><h6>/</h6>
                                         <li className="breadcrumb-item active">Overview</li>
                                     </ol>
                                 </div>
-
-
-                                {/* <form className='contenar'> */}
-                                {/* <form> */}
-                                {/* <div className='Box' style={{ height: '100%', weight: '100%', pading: '5%' }}> */}
-                                {/* <div className="App"> */}
                                 <div className="form-group s">
                                     <label for="usr">district</label>
                                     <input type="text" name="district" value={district} onChange={(e) => { setdistrict(e.target.value) }} class="form-control" id="usr" placeholder="district" required />
@@ -120,22 +112,12 @@ const Auctiont2 = () => {
                                     <label for="usr">Survey Number</label>
                                     <input type="text" name="survey_number" value={survey_number} onChange={(e) => { setsurvey_number(e.target.value) }} class="form-control" id="usr" placeholder="Survey Number" required />
                                 </div>
-                                {/* <input type="text" name="user_id"  value={user_id} onChange={(e)=>{setUser_id(e.target.value)}} /> <br /> <br /> */}
                                 <div className="form-group s" >
                                     <Button onClick={handleShow} className="btn btn-primary btn-lg btn-block" style={{ margin: '1px' }} variant="contained" color="primary">
                                         Add
                                     </Button>
-                                    {/* <button type="button" onClick={saveData} class=" btn btn-primary btn-block"  style={{ margin: '1px' }} > */}
-                                    {/* <a href='/epp1'> */}
-                                    {/* Add */}
-                                    {/* </a> */}
-                                    {/* </button> */}
-                                    {/* </div> */}
-                                    {/* </div> */}
 
                                 </div>
-                                {/* </form> */}
-                                {/* </form> */}
 
                                 <Modal
                                     show={show}
@@ -144,36 +126,26 @@ const Auctiont2 = () => {
                                     keyboard={false}
                                     className="cardtop"
                                 >
-                                    {/* <Modal.Header closeButton> */}
-                                    {/* <Modal.Title>Modal title</Modal.Title>                                         */}
-                                    {/* </Modal.Header> */}
                                     <CheckCircleOutlineSharpIcon fontSize="large" className='right'></CheckCircleOutlineSharpIcon>
                                     <h4 className='cantentbox'>User EPP Updated</h4>
                                     <h6 className='cantentbo'>EPP Data Updated</h6>
-                                    {/* <Modal.Footer> */}
                                     <div class="row justify-content-md-center rowend">
                                         <div class="col col-lg-2">
                                             <Button className='secondaryclose' onClick={saveData} variant="primary" color="primary">
                                                 <Link to={'/eppt2'}>Yes</Link></Button>
                                         </div>
-
                                         <div class="col col-lg-2">
                                             <Button className='secondaryclosebutton' variant="secondary" onClick={handleClose}>
                                                 No
                                             </Button>
                                         </div>
                                     </div>
-
-
-                                    {/* </Modal.Footer> */}
                                 </Modal>
-
                             </ol>
                         </div>
                     </div>
                 </div>
             </div>
-
         </>
     );
 }

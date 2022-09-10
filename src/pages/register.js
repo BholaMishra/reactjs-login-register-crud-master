@@ -1,69 +1,4 @@
-// import React from 'react'
-// import { Grid, Paper, Avatar, Typography, TextField, Button } from '@material-ui/core'
-// // import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
-// import Radio from '@material-ui/core/Radio';
-// import RadioGroup from '@material-ui/core/RadioGroup';
-// import FormControlLabel from '@material-ui/core/FormControlLabel';
-// import FormControl from '@material-ui/core/FormControl';
-// import FormLabel from '@material-ui/core/FormLabel';
-// import Checkbox from '@material-ui/core/Checkbox';
-// const Signup = () => {
-//     const paperStyle = { padding: 20, width: 300, margin: "0 auto" }
-//     const headerStyle = { margin: 0 }
-//     const avatarStyle = { backgroundColor: '#1bbd7e' }
-//     const marginTop = { marginTop: 5 }
-//     return (
-//         <div >
-//         <Grid className="registernew">
-//             <Paper style={paperStyle}>
-//                 <Grid align='center'>
-
-//                     <Avatar style={avatarStyle}>
-//                         {/* <AddCircleOutlineOutlinedIcon /> */}
-//                     </Avatar>
-//                     <img src="pages/logo.jpg" alt="Logo" width="300" height="600"></img>
-//                     <h2 style={headerStyle}>Sign Up</h2>
-//                     <Typography variant='caption' gutterBottom>Don't have an account? Create your own account, it takes less than a minute</Typography>
-//                 </Grid>
-//                 <form>
-//                     <TextField fullWidth label='Name' placeholder="Enter your name" />
-//                     <br />
-//                     <TextField fullWidth label='Email' placeholder="Enter your email" />
-//                     <br />
-//                     {/* <FormControl component="fieldset" style={marginTop}>
-//                         <FormLabel component="legend">Gender</FormLabel>
-//                         <RadioGroup aria-label="gender" name="gender" style={{ display: 'initial' }}>
-//                             <FormControlLabel value="female" control={<Radio />} label="Female" />
-//                             <FormControlLabel value="male" control={<Radio />} label="Male" />
-//                         </RadioGroup>
-//                     </FormControl> */}
-//                     <TextField fullWidth type="num" label='Phone Number' placeholder="Enter your phone number" />
-//                     <br />
-//                     <TextField fullWidth type="password" label='Password' placeholder="Enter your password" />
-//                     <br />
-//                     <TextField fullWidth type="password" label='Confirm Password' placeholder="Confirm your password" />
-//                     <br />
-//                     <br />
-//                     <FormControlLabel
-//                         control={<Checkbox name="checkedA" />}
-//                         label="I accept the terms and conditions."
-//                     />
-
-//                     <Button to={"login"} className="btn btn-primary btn-lg btn-block" style={{ margin: '1px' }} type='submit' variant='contained' color='primary'>
-//                         Sign up
-//                     </Button>
-//                 </form>
-//             </Paper>
-//         </Grid>
-//         </div>
-//     )
-// }
-
-// export default Signup;
-
 import React, { useEffect, useState } from "react";
-// import basestyle from "../Base.module.css";
-// import registerstyle from "./Register.module.css";
 import { Button, Link, } from '@material-ui/core'
 import axios from "axios";
 import { useNavigate, useHistory } from 'react-router-dom'
@@ -200,16 +135,10 @@ const Register = () => {
                     //   className={basestyle.error}
                     >{formErrors.cpassword}</p>
                     <Button type='submit' color='primary' variant="contained" onClick={signupHandler} fullWidth>
-                        {/* <Link to='/epp' >
-                        Sign in
-                    </Link> */}
-                        <NavLink to="/epp" color="white" >SignUP</NavLink>
+                        {/* <NavLink to="/epp" color="white" > */}
+                            SignUP
+                            {/* </NavLink> */}
                     </Button>
-                    {/* <button 
-          className={basestyle.button_common}
-           onClick={signupHandler}>
-            Register
-          </button> */}
                 </form>
                 <NavLink to="/login">Already registered? Login</NavLink>
             </div>

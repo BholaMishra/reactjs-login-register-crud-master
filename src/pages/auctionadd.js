@@ -18,11 +18,7 @@ const Auctionadd = () => {
     const [end_date, setEnd_date] = useState("");
     const [startDate, setstartDate] = useState("");
     const [endDate, setendDate] = useState("");
-
-
     //UNAME
-
-    // const [auction_for, setAuction_For] = useState("");
     const [user_id, setUser_id] = useState("");
     const [FirstName, setFirstName] = useState("");
     const [LastName, setLastName] = useState("");
@@ -34,8 +30,6 @@ const Auctionadd = () => {
     const [district, setDistrict] = useState("");
     const [taluka, setTaluka] = useState("");
     const [village, setVillage] = useState("");
-
-
     //Auctionfor
     const [ServiceID, setServiceID] = useState("");
     const [SubType_ShortName, setSubType_ShortName] = useState("");
@@ -45,20 +39,15 @@ const Auctionadd = () => {
     const [Currency, setCurrency] = useState("");
     const [AdhocServiceID, setAdhocServiceID] = useState("");
     const [Fixed_Variable, setFixed_Variable] = useState("");
-    // const [auction_for, setAuction_For] = useState("");
-
     //District
     const [DistrictName, setDistrictName] = useState("");
     const [IsVerified, setIsVerified] = useState("");
     const [stateID, setstateID] = useState("");
     const [RegionID, setRegionID] = useState("");
-
     //Taluka
     const [TalukaName, setTalukaName] = useState("");
-
     //Village
     const [VillageName, setVillageName] = useState("");
-
     const [CitySurveyOfficeID, setCitySurveyOfficeID] = useState("");
     var DistrictData;
     var TalukaData;
@@ -92,8 +81,6 @@ const Auctionadd = () => {
             .catch(error => console.log('error', error));
     }
 
-    // const Add = () => {
-    // const Datatable = () => {
     // All Data handle for data
     const [datae, setDatae] = useState([]);
     //    const handleDelete = this.props.onDelete(this.props.searchItem);
@@ -117,10 +104,7 @@ const Auctionadd = () => {
         });
     }, []);
 
-
     const [dataa, setDataa] = useState([]);
-    //    const handleDelete = this.props.onDelete(this.props.searchItem);
-    // handle for pagination data
     const [pagea, setPagea] = useState(0);
     React.useEffect(() => {
         axios.get(`https://qaapi.jahernotice.com/api/auction/service/type`).then((response) => {
@@ -130,12 +114,7 @@ const Auctionadd = () => {
 
     }, []);
 
-
-
-
     const [datab, setDatab] = useState([]);
-    //    const handleDelete = this.props.onDelete(this.props.searchItem);
-    // handle for pagination data
     const [pageb, setPageb] = useState(0);
     useEffect(function () {
         axios.get(`https://qaapi.jahernotice.com/api/District`).then((response) => {
@@ -144,13 +123,6 @@ const Auctionadd = () => {
 
         });
     }, []);
-
-    // useEffect(function () {
-    //   axios.get('https://qaapi.jahernotice.com/api/District')
-    //     .then((response) => setUser(response.data))
-    //     .then((arror) => console.log(arror));
-    // }, []);
-
     //   const [datan, setDatan] = useState([]);
     const [datac, setDatac] = useState([]);
     const [pagec, setPagec] = useState(0);
@@ -159,13 +131,7 @@ const Auctionadd = () => {
         axios.get('https://qaapi.jahernotice.com/api/Taluka/' + e.target.value).then((response) => {
             setDatac(response.data.data);
             console.log("Taluka", response.data.data)
-
         });
-
-        // .then((response) => setDatac(response.data));
-        // console.log("Taluka", response.data)
-        // .then((arror) => console.log(arror));
-        // console.log("Taluka", response.data)
     };
 
     const [datad, setDatad] = useState([]);
@@ -174,38 +140,8 @@ const Auctionadd = () => {
         axios.get('https://qaapi.jahernotice.com/api/Village/' + e.target.value).then((response) => {
             setDatad(response.data.data);
             console.log("Village", response.data.data)
-
         });
-
     }
-
-    //    const handleDelete = this.props.onDelete(this.props.searchItem);
-    // handle for pagination data
-
-    // const [datac, setDatac] = useState([]);
-    // const [pagec, setPagec] = useState(0);
-    // const onddlChange = ((e) => {
-    //   axios.get(`https://qaapi.jahernotice.com/api/Taluka/4` + e.target.value)
-    //   .then((response) =>  setDatac(response.data))
-    //   .then((arror) => console.log(arror));
-    // }, []);
-
-
-    // const [datad, setDatad] = useState([]);
-    // const [paged, setPaged] = useState(0);
-    // //    const handleDelete = this.props.onDelete(this.props.searchItem);
-    // // handle for pagination data
-    // React.useEffect(() => {
-    //   axios.get(`https://qaapi.jahernotice.com/api/Village/36`).then((response) => {
-    //     setDatad(response.data.data);
-    //     console.log("Village", response.data.data)
-
-    //   });
-    // }, []);
-
-
-
-
 
 
     return (
@@ -215,8 +151,6 @@ const Auctionadd = () => {
                 <div id="wrapper">
                     <Sidebar></Sidebar>
                     <div id="content-wrapper">
-
-
                         <div className="container-fluid">
                             <ol className="breadcrumb">
                                 {/* <form className='form-group'> */}
@@ -226,11 +160,8 @@ const Auctionadd = () => {
                                 <li className="breadcrumb-item active">Overview</li>
                                 <br /><br />
                                 <br />
-
-
                                 <div className="form-group s" >
                                     <label class="my-1 mr-2" for="inlineFormCustomSelectPref" >UserName</label>
-                                    {/* <input type="text" name="UserNamet" value={district} onChange={(e) => { setDistrict(e.target.value) }}  class="form-control" id="usr" placeholder="District" required /> */}
                                     <input class="form-control" type='search' list="datalistOptions" id="exampleDataList" name="User_Name" value={UserID} onChange={(e) => { setUserID(e.target.value) }} placeholder="Select UserName" />
                                     <datalist id="datalistOptions">
                                         <option>Select UserName</option>
@@ -246,70 +177,44 @@ const Auctionadd = () => {
                                 <div className="form-group s" >
                                     <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Auction For</label>
                                     <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="SubType_Name" value={Service_Sub_Type_ID} onChange={(e) => { setService_Sub_Type_ID(e.target.value) }}>
-                                        {/* <input type="text" name="district" value={district} onChange={(e) => { setDistrict(e.target.value) }}  class="form-control" id="usr" placeholder="District" required /> */}
                                         <option>Select Auction For</option>
                                         {dataa.slice(pagea)
                                             .map((dataa, index) => (
                                                 <option key={index}>
                                                     {dataa.SubType_Name}
-                                                    {/* {dataa.Service_Sub_Type_ID}  - {dataa.ServiceID} */}
                                                 </option>
                                             ))}
-
                                     </select>
                                 </div>
-                                {/* <div className="form-group">
-    <label for="pwd">District</label>
-</div> */}
+
                                 <div className="form-group s" >
                                     <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Distric</label>
-                                    {/* <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="DistrictName" value={district} onChange={(e) => { setDistrictID(e.target.value) }}> */}
-                                    {/* <input type="text" name="district" value={district} onChange={(e) => { setDistrict(e.target.value) }}  class="form-control" id="usr" placeholder="District" required /> */}
                                     <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="DistrictName" onChange={onddlChange}>
-                                        {/* <input type="text" name="district" value={district} onChange={(e) => { setDistrict(e.target.value) }}  class="form-control" id="usr" placeholder="District" required /> */}
                                         <option>Select district</option>
                                         {datab.slice(pageb)
                                             .map((datab, index) => (
                                                 <option key={datab.id} value={datab.DistrictID} >
                                                     {datab.DistrictName}
-                                                    {/* - {datab.DistrictID} */}
                                                 </option>
                                             ))}
-
                                     </select>
-
-                                    {/* </select> */}
                                 </div>
-                                {/* <div className="form-group" >
-    <label for="usr">Taluka</label>
-    <input type="text" name="taluka" value={taluka} onChange={(e) => { setTaluka(e.target.value) }}  class="form-control" id="usr" placeholder="Taluka" required />
-</div> */}
+
                                 <div className="form-group s" >
                                     <label class="my-1 mr-2" for="inlineFormCustomSelectPref" >Taluka</label>
-                                    {/* <input type="text" name="taluka" value={taluka} onChange={(e) => { setTaluka(e.target.value) }}  class="form-control" id="usr" placeholder="Taluka" required /> */}
-                                    {/* <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="TalukaName" value={taluka} onChange={(e) => { setTaluka(e.target.value) }}> */}
                                     <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="TalukaName" onChange={someComponent} >
                                         <option>Select Taluka</option>
                                         {datac
                                             .map((datac) => (
                                                 <option key={datac.id} value={datac.TalukaID}>
                                                     {datac.TalukaName}
-                                                    {/* -{datac.DistrictID} */}
-                                                    {/* - {datac.TalukaID} - {datac.DistrictID} */}
                                                 </option>
                                             ))}
-
                                     </select>
-                                    {/* </select> */}
                                 </div>
-                                {/* <div className="form-group">
-    <label for="pwd">Villlage</label>
-    <input type="text" name="village" value={village} onChange={(e) => { setVillage(e.target.value) }} class="form-control" id="usr" placeholder="Villlage" required />
-</div> */}
+
                                 <div className="form-group s" >
                                     <label class="my-1 mr-2" for="inlineFormCustomSelectPref" >Villlage</label>
-                                    {/* <input type="text" name="village" value={village} onChange={(e) => { setVillage(e.target.value) }} class="form-control" id="usr" placeholder="Villlage" required /> */}
-                                    {/* <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="VillageName" value={village} onChange={(e) => { setVillage(e.target.value) }}> */}
                                     <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="VillageName" value={VillageID} onChange={(e) => { setVillageID(e.target.value) }} >
                                         <option>Select Villlage</option>
                                         {datad.slice(paged)
@@ -317,13 +222,9 @@ const Auctionadd = () => {
                                                 <option key={datad.id} value={datad.VillageID}
                                                 >
                                                     {datad.VillageName}
-                                                    {/* - {datad.VillageID}  - {datad.TalukaID} */}
                                                 </option>
                                             ))}
-
                                     </select>
-
-                                    {/* </select> */}
                                 </div>
                                 <div className="form-group s">
                                     <label for="usr">Start_Date</label>
@@ -337,20 +238,13 @@ const Auctionadd = () => {
                                     <Button onClick={saveData} className="btn btn-primary btn-lg btn-block" style={{ margin: '1px' }} variant="contained" color="primary">
                                         Add
                                     </Button>
-                                    {/* <input type="text" name="user_id"  value={user_id} onChange={(e)=>{setUser_id(e.target.value)}} /> <br /> <br /> */}
-                                    {/* <button type="button" onClick={saveData} class="btn btn-primary btn-block" style={{ margin: '1px' }} >Add</button> */}
                                 </div>
-                                {/* </div> */}
                                 <br />
-
-
-
                             </ol>
                         </div>
                     </div>
                 </div>
             </div>
-
         </>
     );
 }

@@ -1,4 +1,3 @@
-// import React, { useState, Paper } from 'react';
 import Header from "../elements/header";
 import Sidebar from "../elements/sidebar";
 import { Link, button, useHistory } from 'react-router-dom';
@@ -14,10 +13,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-// import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-// import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 
@@ -32,31 +29,9 @@ const useStyles = makeStyles({
     },
 });
 
-
-
-//   const classes = useStyles();
-
-// const classes = useStyles();
-// const [page, setPage] = useState(0);
-// const [rowsPerPage, setRowsPerPage] = useState(10);
-
-// const handleChangePage = (event, newPage) => {
-//     setPage(newPage);
-// };
-
-// const handleChangeRowsPerPage = (event) => {
-//     setRowsPerPage(parseInt(+event.target.value, 10));
-//     setPage(0);
-// };
-
-// // All Data handle for data
-// const [data, setData] = useState([]);
-
-// export default function StickyHeadTable() {
 export default function StickyHeadTable() {
 
     const history = useHistory();
-
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -72,12 +47,6 @@ export default function StickyHeadTable() {
 
     // // All Data handle for data
     const [data, setData] = useState([]);
-    // handle for pagination data
-    //   const [page, setPage] = useState(0);
-
-    //   // handle for tables rows
-    //   const [rowsPerPage, setRowsPerPage] = useState(5);
-
 
     React.useEffect(() => {
         axios.get(`https://qaapi.jahernotice.com/api/Epp`).then((response) => {
@@ -86,46 +55,26 @@ export default function StickyHeadTable() {
         });
     }, []);
 
-    // import React from 'react';
-
-
-
     const editrow = (e) => {
         console.log(e)
     }
-
     const doGet = React.useCallback(async (params) => {
         // setData(await getData(params));
-      }, []);
-  
-      React.useEffect(() => {
+    }, []);
+    React.useEffect(() => {
         doGet({});
-      }, [doGet]);
-  
-      // features
-  
-      const [search, setSearch] = React.useState('');
-  
-    //   useCustom('search', data, {
-    //     state: { search },
-    //     onChange: onSearchChange,
-    //   });
-  
-      function onSearchChange(action, state) {
+    }, [doGet]);
+
+    const [search, setSearch] = React.useState('');
+    function onSearchChange(action, state) {
         const params = {
-          search: state.search,
+            search: state.search,
         };
-  
         doGet(params);
-      }
-  
-      const handleSearch = (event) => {
+    }
+    const handleSearch = (event) => {
         setSearch(event.target.value);
-      };
-
-
-
-
+    };
 
     return (
         <>
@@ -145,19 +94,14 @@ export default function StickyHeadTable() {
                                     <li className="breadcrumb-item active">Overview</li>
                                 </ol>
                                 <div className="AddEpp" style={{ border: 'none', color: 'revert' }}>
-                                    
                                     {/* <ul className="nav nav-tabs nav-justified"> */}
                                     <Button className="btn btn-primary tg " id="addd" variant="contained" color="primary">
                                         <Link variant="contained" color="primary" to={"/eppnewadd"} style={{ border: 'none', color: 'white' }}>Add New Epp</Link>
-
                                     </Button>
                                     {/* <br/> */}
                                     <Button className="btn btn-primary tg " id="addd1" variant="contained" color="primary">
                                         <Link variant="contained" color="primary" to={"/eppnewadd1"} style={{ border: 'none', color: 'white' }}>Add Exiting EPP</Link>
                                     </Button>
-                                    {/* <button className="btn btn-primary tg "><Link to={"/eppnewadd"} style={{ border: 'none', color: 'white' }}>Add New APP</Link></button> */}
-                                    {/* <button className="btn btn-primary ta  "><Link to={"/eppnewadd1"} style={{ border: 'none', color: 'white' }}>Add Exiting EPP</Link></button> */}
-                                    {/* </ul> */}
                                 </div>
                                 <br />
                                 <form>
@@ -166,7 +110,6 @@ export default function StickyHeadTable() {
                                         <Button className="btn btn-primary btn-lg " variant="contained" color="primary">
                                             ALL
                                         </Button>
-
                                         {/* className='NAV font-weight-bold' */}
                                         <Button className="btn1 btn-lg  " style={{ border: 'none', }} variant="outlined" color="primary">
                                             <Link className='NAV font-weight-bold ' variant="outlined" color="primary" to={"/previaus"} style={{ border: 'none', color: 'blac' }}>Previous-Month</Link>
@@ -180,19 +123,6 @@ export default function StickyHeadTable() {
 
                                     </div>
                                 </form>
-
-                                {/* <div>Hello</div> */}
-                                {/* <br /> */}
-                                {/* <form>
-                                        <div className="tb-table-table" style={{ color: '', border: '1px' }}>
-                                            <ul class="nav nav-tabs nav-justified">
-                                            <button className="btn btn-primary btn-lg " Active>ALL</button>
-                                            <button className="btn1 btn-lg  " style={{ border: 'none' }}><Link to={"/previaus"} style={{ border: 'none' }}>Previous-Month</Link></button>
-                                            <button className="btn2 btn-lg " style={{ border: 'none' }}><Link to={"/this"} style={{ border: 'none' }}>This-Month</Link></button>
-                                            <button className="btn3 btn-lg " style={{ border: 'none', text: 'bold' }}><Link to={"/next"} style={{ border: 'none' }}>Next-Month</Link></button>
-                                            </ul>
-                                        </div>
-                                    </form> */}
                                 <form className='contenar'>
                                     <>
                                         <form className="" style={{ border: '1px' }}>
@@ -234,10 +164,6 @@ export default function StickyHeadTable() {
                                             </div>
                                         </form>
                                     </>
-
-
-                                    {/* <br /> */}
-
                                     <TableContainer component={Paper}>
                                         <Table
                                             sx={{ minWidth: 650 }}
@@ -269,7 +195,7 @@ export default function StickyHeadTable() {
                                                             sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                                                         >
                                                             <TableCell>{index + 1}</TableCell>
-                                                            <TableCell>{data.FirstName} {data.LastName}</TableCell>
+                                                            <TableCell>{data.FirstName ? data.FirstName : "Null"} {data.LastName}</TableCell>
                                                             {/* <TableCell>{data.LastName}</TableCell> */}
                                                             <TableCell>{data.MobileNo}</TableCell>
                                                             <TableCell>{data.EmailID}</TableCell>
@@ -293,7 +219,8 @@ export default function StickyHeadTable() {
                                                                                 history.push('/eppadd1', {
                                                                                     start_date: moment(data.start_date).format("YYYY-MM-DD"),
                                                                                     end_date: moment(data.end_date).format("YYYY-MM-DD"),
-                                                                                    UserID: (data.UserID)                                                                               })
+                                                                                    UserID: (data.UserID)
+                                                                                })
                                                                             }} style={{ border: 'none' }}>
                                                                                 <i class="bi bi-box-arrow-in-down-left font-weight-bold ">
                                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-box-arrow-in-down-left" viewBox="0 0 16 16">
@@ -304,26 +231,10 @@ export default function StickyHeadTable() {
                                                                         </div>
                                                                     </div>
                                                                 </div>
-
-
-
-
                                                                 <div class="row">
                                                                     <div class="col-1" style={{ bold: '2' }}>
-
-
-
                                                                     </div>
                                                                     <div class="col-1" style={{ bold: '2' }}>
-
-                                                                        {/* <Link className="Di-Box" to={"/eppadd1"} style={{ border: 'none', color: 'black' }}>
-                                                                            <i class="bi bi-box-arrow-in-down-left">
-                                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-down-left" viewBox="0 0 16 16">
-                                                                                    <path fill-rule="evenodd" d="M9.636 2.5a.5.5 0 0 0-.5-.5H2.5A1.5 1.5 0 0 0 1 3.5v10A1.5 1.5 0 0 0 2.5 15h10a1.5 1.5 0 0 0 1.5-1.5V6.864a.5.5 0 0 0-1 0V13.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z" />
-                                                                                    <path fill-rule="evenodd" d="M5 10.5a.5.5 0 0 0 .5.5h5a.5.5 0 0 0 0-1H6.707l8.147-8.146a.5.5 0 0 0-.708-.708L6 9.293V5.5a.5.5 0 0 0-1 0v5z" />
-                                                                                </svg></i>
-                                                                        </Link> */}
-
                                                                     </div>
                                                                 </div>
                                                             </TableCell>
@@ -332,7 +243,6 @@ export default function StickyHeadTable() {
                                             </TableBody>
                                         </Table>
                                     </TableContainer>
-                                    {/* </ table pagination> */}
                                     <TablePagination
                                         rowsPerPageOptions={[5, 10, 25, 50, 100]}
                                         component="div"
@@ -344,13 +254,11 @@ export default function StickyHeadTable() {
                                     />
                                 </form>
                             </Paper>
-                            {/* </ol> */}
                         </div>
                     </div>
                 </div>
             </div>
-
         </>
     );
 }
-// export default Dashboard
+

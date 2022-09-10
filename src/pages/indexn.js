@@ -52,8 +52,7 @@ const handleChange = (event, newValue) => {
       <TabPanel value={value} index={1}>
       <Signup/>
       </TabPanel>
-      </Paper>
-      
+      </Paper>      
     )
 }
 
