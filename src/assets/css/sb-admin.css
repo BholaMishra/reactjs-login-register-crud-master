@@ -29,6 +29,217 @@
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
+/*  */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+.container,
+.form-box {
+  display: block;
+  width: 100%;
+}
+
+body {
+  background: #1a9ae2;
+  font-family: 'Lato', sans-serif;
+}
+
+.form-box {
+  max-width: 350px;
+  margin: 100px auto;
+  border-radius: 10px;
+  min-height: 200px;
+  padding: 30px;
+  background: #fff;
+}
+
+.form-box .input-field {
+
+  margin-bottom: 20px;
+  position: relative;
+
+}
+
+.form-box input {
+  display: block;
+  min-height: 20px;
+  font-size: 18px;
+  padding: 10px;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.form-box input[type='text'] {
+  padding-right: 25px
+}
+
+.form-box h2 {
+  display: block;
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 40px;
+}
+
+.form-box label {
+  font-size: 20px;
+  color: #000000;
+  margin-bottom: 5px;
+  display: block;
+
+}
+
+.form-box input[type='submit'] {
+  background: #1a9ae2;
+  cursor: pointer;
+  color: #fff;
+
+}
+
+.form-box .fa {
+  position: absolute;
+  right: 10px;
+  margin-top: -30px;
+}
+
+.form-box .input-field.error input {
+  border-color: #f00;
+  border-width: 2px;
+}
+
+.form-box .input-field.error .fa {
+  color: #f00;
+}
+
+.form-box .input-field.success input {
+  border-color: #0b0;
+  border-width: 2px;
+}
+
+.form-box .input-field.success .fa {
+  color: #0b0;
+}
+
+.input-field span {
+  display: none;
+}
+
+.input-field.error span {
+  color: #f00;
+  display: block
+}
+
+.input-field.success span {
+  color: #0b0;
+}
+
+
+
+
+
+/*  */
 *,
 *::before,
 *::after {
@@ -48,6 +259,23 @@
   margin-left: 35%;
   margin-top: 20px;
   /* justify-items: center; */
+}
+
+.FormError {
+  font-size: x-small;
+  color: red;
+  margin-left: 43px;
+}
+
+.FormErrorss {
+  font-size: x-small;
+  color: red;
+  margin-left: -219px;
+}
+
+.sample-form-errors {
+  font-size: x-small;
+  color: red;
 }
 
 .secondaryclosebutton {
@@ -193,7 +421,9 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-
+.iconfavicon {
+  background-color: wheat;
+}
 
 
 article,
@@ -223,12 +453,20 @@ section {
 .ButtonDcolore {
   margin-top: 6px;
   margin-right: 3px;
-  color: #00acc1;
+  font-size: 15px;
+  color: #39adbb;
 
 }
 
+.Tpalerteditform {
+  margin-top: 10px;
+  margin-left: 17px;
+  margin-right: 72%;
+}
+
 .ButtonDcoloreicon {
-  color: #00acc1;
+  color: #39adbb;
+  font-size: 15px;
   margin-top: 5px;
 
 }
@@ -250,13 +488,28 @@ section {
   margin-right: 10px;
 }
 
+.Tpalerteditformauction {
+  margin-left: 62px;
+  /* margin-right: 60px; */
+}
+
 .d-none {
   margin-right: 10px;
 }
 
 .Submiticone {
-  height: 1%;
-  width: 1%;
+  margin-left: 10%;
+}
+
+.rowhed {
+  margin-right: 20px;
+}
+
+#iconname {
+  margin-right: 80px;
+  margin-top: 14px;
+  height: 10px;
+  width: 5px;
 }
 
 .col.col-lg-2 {
@@ -402,6 +655,7 @@ p {
   margin-left: 50px;
   margin-right: -30px;
 }
+
 .bn {
   width: 60px;
   height: 40px;
@@ -412,25 +666,46 @@ p {
 }
 
 .tb-table-table {
-   border: none;
+  border: none;
   margin-left: 90px;
   margin-bottom: 25px;
 }
 
 .btn1.btn-lg {
-  margin-left: 110px;
+  margin-left: 126px;
   margin-right: 110px;
   background-color: white;
 }
 
 .btn2.btn-lg {
-  margin-right: 110px;
+  margin-right: 135px;
   background-color: white;
 }
 
 .btn3.btn-lg {
   margin-right: 60px;
   background-color: white;
+}
+
+.btn4.btn-lg {
+  margin-left: 300px;
+  background-color: white;
+}
+
+.btn5.btn-lg {
+  margin-left: 250px;
+  background-color: white;
+}
+
+.dateinput {
+  margin-left: 751px;
+  height: 36px;
+  width: 7%;
+  border: 1px solid #c9cdd1;
+  border-radius: 5px;
+  border-color: #c9cdd1;
+  border-top-color: #c9cdd1;
+  border-right-color: #c9cdd1;
 }
 
 
@@ -5243,6 +5518,18 @@ input[type="button"].btn-block {
 
 .EPPDite4 {
   margin-right: 749px;
+}
+
+.EPPDitetpta {
+  margin-right: 749px;
+}
+
+.EPPDiteaa {
+  margin-right: 705px;
+}
+
+.EPPDitetptaba {
+  margin-right: 700px;
 }
 
 .navbar>.container,

@@ -67,7 +67,7 @@ const Login = ({ setUserState }) => {
                     onChange={changeHandler}
                     value={user.email}
                 />
-                <p
+                <p className='FormErrorss' 
                 // className={basestyle.error}
                 >{formErrors.email}</p>
                 <input
@@ -78,7 +78,7 @@ const Login = ({ setUserState }) => {
                     onChange={changeHandler}
                     value={user.password}
                 />
-                <p
+                <p className='FormErrorss'
                 // className={basestyle.error}
                 >{formErrors.password}</p>
                 <Button type='submit' color='primary' variant="contained" onClick={loginHandler} fullWidth>

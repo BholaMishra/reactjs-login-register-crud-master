@@ -19,39 +19,29 @@ const Auctiont2 = () => {
     console.log(location)
 
     const [show, setShow] = useState(false);
-
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const id = useState(location.state.userEPPSubscription
-    );
-
+    const id = useState(location.state.userEPPSubscription);
     const [user_name, setUser_Name] = useState("");
     const [district, setdistrict] = useState(location.state.district);
     const [taluka, settaluka] = useState(location.state.taluka);
     const [village, setvillage] = useState(location.state.village);
     const [survey_number, setsurvey_number] = useState(location.state.survey_number);
     const [Admin_ID, setAdmin_ID] = useState("");
-    const [userEPPSubscription
-        , setuserEPPSubscription
-    ] = useState(location.state.userEPPSubscription
-    );
-
+    const [userEPPSubscription, setuserEPPSubscription] = useState(location.state.userEPPSubscription);
     const [startDate, setstartDate] = useState("");
-
     const [user_id, setUser_id] = useState("");
     const [group_id, setGroup_id] = useState("");
-
     const [UserName, setUserName] = useState("");
-
     const [data, setData] = useState([]);
     const [UserID, setUserID] = useState([]);
 
     React.useEffect(() => {
-        axios.get(`https://qaapi.jahernotice.com//api/EppByID/`+` ${userEPPSubscription}`).then((response) => {
-                setData(response.data.data);
-                console.log("Bhola", response.data.data)
-            });
+        axios.get(`https://qaapi.jahernotice.com//api/EppByID/ ` + ` ${userEPPSubscription}`).then((response) => {
+            setData(response.data.data);
+            console.log("Bhola", response.data.data)
+        });
     }, []);
 
     function saveData() {
@@ -71,11 +61,12 @@ const Auctiont2 = () => {
         }).then((result) => {
             result.json().then((resp) => {
                 console.log(resp.data)
-                setuserEPPSubscription
-                    ()
+                // setuserEPPSubscription()
             })
         })
     }
+
+
 
     return (
         <>
@@ -88,9 +79,9 @@ const Auctiont2 = () => {
                             <ol className="breadcrumb">
                                 <div className="container-fluid">
                                     <ol className="breadcrumb">
-                                        <li><h6 className="EPPDite4">Edit</h6></li>
+                                        <li><h6 className="EPPDite4 breadcrumb-item active">Edit</h6></li>
                                         <li className="breadcrumb-itemac">
-                                            <Link className="bread" to={'/eppt2'} >EPP Details By userEPPSubscription
+                                            <Link className="bread breadcrumb-item active" to={'epp'} >EPP Details By User
                                             </Link>
                                         </li><h6>/</h6>
                                         <li className="breadcrumb-item active">Overview</li>
@@ -112,11 +103,11 @@ const Auctiont2 = () => {
                                     <label for="usr">Survey Number</label>
                                     <input type="text" name="survey_number" value={survey_number} onChange={(e) => { setsurvey_number(e.target.value) }} class="form-control" id="usr" placeholder="Survey Number" required />
                                 </div>
+                                <br />
                                 <div className="form-group s" >
                                     <Button onClick={handleShow} className="btn btn-primary btn-lg btn-block" style={{ margin: '1px' }} variant="contained" color="primary">
                                         Add
                                     </Button>
-
                                 </div>
 
                                 <Modal
@@ -135,9 +126,7 @@ const Auctiont2 = () => {
                                                 <Link to={'/eppt2'}>Yes</Link></Button>
                                         </div>
                                         <div class="col col-lg-2">
-                                            <Button className='secondaryclosebutton' variant="secondary" onClick={handleClose}>
-                                                No
-                                            </Button>
+                                            <Button className='secondaryclosebutton' variant="secondary" onClick={handleClose}>No</Button>
                                         </div>
                                     </div>
                                 </Modal>

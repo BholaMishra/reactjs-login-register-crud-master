@@ -6,6 +6,7 @@ import FormatAlignJustifyIcon from '@material-ui/icons/FormatAlignJustify';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 
 const Header = () => {
@@ -32,18 +33,19 @@ const Header = () => {
         <nav className="navbar navbar-expand navbar-dark bg-dark static-top">
             {/* <div className={classes.root}>
                 <Avatar alt="Bemy Sharp" src="" />
-            </div> */}
-
+                </div> */}
             <TitleComponent title="EPP Module"></TitleComponent>
-            <FormatAlignJustifyIcon className='hemb'>
+            {/* <FormatAlignJustifyIcon className='hemb'>
                 <Link className='ButtonDcolore' to={'/header'}></Link>
-            </FormatAlignJustifyIcon>
-                <h6 className='font-weight-bolddn'><Link to={'/'} className="navbar-brand mr-0">EPP Module</Link></h6>
+            </FormatAlignJustifyIcon> */}
+            <h6 className='font-weight-bolddn'><Link to={'/'} className="navbar-brand mr-0">EPP </Link></h6>
             <i className="btn btn-link btn-sm text-white order-1 order-sm-0  " id="sidebarToggle">
-
             </i>
+            <Button>
+                <Link to={'/testimonial'}></Link>
+            </Button>
             <form className="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-                <div class="input-group-mb-3">
+                {/* <div className="input-group-mb-3">
                     <div className="input-group a">
                         <input type="text" className="form-control" placeholder="Search for..." aria-label="Search"
                             aria-describedby="basic-addon2" style={{ height: '2rem', width: '-40rem', }} />
@@ -57,7 +59,7 @@ const Header = () => {
                             </Button>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </form>
             <br /><br />
             <ul className="navbar-nav ml-auto ml-md-0">
@@ -70,13 +72,11 @@ const Header = () => {
                     </Link>
                     <div className="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                         <Link to={'#'} className="dropdown-item ">Welcome ! Bhola</Link>
-                        <Link to={'#'} className="dropdown-item">Activity Log</Link>
+                        <Link to={'#'} className="dropdown-item"><ExitToAppIcon style={{ fontSize: 'medium' }} /> Activity Log</Link>
                         {/* <div className="dropdown-divider"></div> */}
                         {/* <Link to={'#'} onClick={this.handleClickLogout} className="dropdown-item" data-toggle="modal" data-target="#logoutModal">Logout</Link> */}
                     </div>
                 </li>
-
-
             </ul>
         </nav>
     );

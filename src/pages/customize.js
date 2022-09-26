@@ -17,6 +17,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
+import { DateRangeOutlined } from "@material-ui/icons";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -42,6 +43,9 @@ export default function StickyHeadTable() {
 
     const history = useHistory();
     const classes = useStyles();
+
+    const [UserID, setUserID] = useState("");
+    const [EPPCount, setEPPCount] = useState("");
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -56,14 +60,24 @@ export default function StickyHeadTable() {
 
     // // All Data handle for data
     const [data, setData] = useState([]);
-
     React.useEffect(() => {
-        axios.get(`https://qaapi.jahernotice.com/api/Epp/0`).then((response) => {
+        axios.get(` https://qaapi.jahernotice.com/api/Epp/0`).then((response) => {
             setData(response.data.data);
             console.log("Bhola", response.data.data)
         });
     }, []);
 
+    const today = new Date(),
+    date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    // const [date, setDate] = useState("")
+    React.useEffect(() => {
+        axios.get(` https://qaapi.jahernotice.com/api/Epp/`+`${today.getDate()}`).then((response) => {
+            setData(response.data.data);
+            console.log("Bhola", response.data.data)
+        });
+    }, []);
+   
+    // 
     const editrow = (e) => {
         console.log(e)
     }
@@ -85,6 +99,7 @@ export default function StickyHeadTable() {
         setSearch(event.target.value);
     };
 
+
     return (
         <>
             <div>
@@ -103,7 +118,6 @@ export default function StickyHeadTable() {
                                     <li className="breadcrumb-item active">Overview</li>
                                 </ol>
                                 <div className="AddEpp" style={{ border: 'none', color: 'revert' }}>
-                                    {/* <ul className="nav nav-tabs nav-justified"> */}
                                     <Button className="btn btn-primary tg " id="addd" variant="contained" color="primary">
                                         <Link variant="contained" color="primary" to={"/eppnewadd"} style={{ border: 'none', color: 'white' }}>Add New Epp</Link>
                                     </Button>
@@ -115,16 +129,24 @@ export default function StickyHeadTable() {
                                 <br />
                                 <form>
                                     <div className="tb-table-table" style={{ color: '', border: '1px' }}>
-                                        <Button className="btn btn-primary btn-lg " variant="contained" color="primary">ALL</Button>
-                                        {/* className='NAV font-weight-bold' /currentdate  /customize */}
+                                        <Button className="btn btn-primary btn-lg " variant="contained" color="primary">ALL
+                                            {/* <Link className='NAV font-weight-bold ' variant="outlined" color="primary" to={"/epp"} style={{ border: 'none', color: 'blac' }}>ALL</Link> */}
+                                        </Button>
+                                        {/* className='NAV font-weight-bold' */}
                                         <Button className="btn4 btn-lg  " style={{ border: 'none', }} variant="outlined" color="primary">
                                             <Link className='NAV font-weight-bold ' variant="outlined" color="primary" to={"/currentdate"} style={{ border: 'none', color: 'blac' }}>Current-Date</Link>
                                         </Button>
-                                        <Button className="btn5 btn-lg  " style={{ border: 'none' }} color="primary">
-                                            <Link className='NAV font-weight-bold' variant="contained" color="primary" to={"#"} style={{ border: 'none', color: 'blac' }}>Customize</Link>
+                                        <Button className="btn5 btn-lg  " variant="contained" style={{ border: 'none' }} color="primary">
+                                            <Link className='NAV font-weight-bold' variant="contained" color="primary" to={"/customize"} style={{ border: 'none', color: 'blac' }}>Customize</Link>
                                         </Button>
                                     </div>
                                 </form>
+                                <form>
+                                    <div className="form-group">
+                                        <input type="date" name="date" class="dateinput" id="usr" placeholder="Date" value={date} onChange={(e)=> {today.getDate(e.target.value)}}  required />
+                                    </div>
+                                </form>
+                                <br />
                                 <form className='contenar'>
                                     <>
                                         <form className="" style={{ border: '1px' }}>

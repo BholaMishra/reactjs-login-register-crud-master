@@ -13,9 +13,11 @@ import CheckCircleOutlineSharpIcon from '@material-ui/icons/CheckCircleOutlineSh
 
 
 const Auctiont2 = () => {
+
     const location = useLocation();
-    console.log(location)
-    const id = useState(location.state.UserSubscriptionMainID);
+    // console.log(location)
+
+    // const id = useState(location.state.UserSubscriptionMainID);
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -45,7 +47,7 @@ const Auctiont2 = () => {
 
     function updateUser() {
         let data = { startDate, UsersubscriptionMainID, endDate }
-        console.warn("data", data, id)
+        console.warn("data", data,)
         fetch(`https://qaapi.jahernotice.com/api/auction/update/${UsersubscriptionMainID}`, {
             method: 'PUT',
             headers: {
@@ -74,28 +76,30 @@ const Auctiont2 = () => {
                             <ol className="breadcrumb">
                                 <div className="container-fluid">
                                     <ol className="breadcrumb">
-                                        <li><h6 className="EPPDite">Edit</h6></li>
+                                        <li><h6 className="EPPDite breadcrumb-item active">Edit</h6></li>
                                         <li className="breadcrumb-itemac">
-                                            <Link className="bread" to={'/auction'} >Auction</Link>
+                                            <Link className="bread breadcrumb-item active" to={'/auction'} >Auction</Link>
                                         </li><h6>/</h6>
                                         <li className="breadcrumb-item active">Overview</li>
                                     </ol>
                                 </div>
-                                <div className="form-group s ">
-                                    <label for="usr"> startDate</label>
-                                    <input type="date" name=" startDate" value={startDate} onChange={(e) => { setstartDate(e.target.value) }
-
-                                    } class="form-control" id="usr" placeholder=" startDate" required />
-                                </div>
-                                <div className="form-group s " >
-                                    <label for="usr"> endDate</label>
-                                    <input type="date" name=" endDate" value={endDate} onChange={(e) => { setendDate(e.target.value) }} class="form-control" id="usr" placeholder=" endDate" required />
-                                </div>
-                                <div className="form-group s " >
-                                    <Button onClick={handleShow} className="btn btn-primary btn-lg btn-block" style={{ margin: '1px' }} variant="contained" color="primary">
-                                        Add
-                                    </Button>
-                                </div>
+                                <form className='Tpalerteditformauction'>
+                                    <div className="form-group s ">
+                                        <label for="usr"> startDate</label>
+                                        <input type="date" name=" startDate" value={startDate} onChange={(e) => { setstartDate(e.target.value) }} class="form-control" id="usr" placeholder=" startDate" required />
+                                    </div>
+                                    <div className="form-group s " >
+                                        <label for="usr"> endDate</label>
+                                        <input type="date" name=" endDate" value={endDate} onChange={(e) => { setendDate(e.target.value) }} class="form-control" id="usr" placeholder=" endDate" required />
+                                    </div>
+                                    <br />
+                                    <div className="form-group s " >
+                                        <Button type="submit" onClick={handleShow} className="btn btn-primary btn-lg btn-block" style={{ margin: '1px' }} variant="contained" color="primary">
+                                            Add
+                                        </Button>
+                                    </div>
+                                </form>
+                                <br /><br />
                                 <Modal
                                     show={show}
                                     onHide={handleClose}

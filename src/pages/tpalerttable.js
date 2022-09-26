@@ -1,6 +1,6 @@
 import Header from "../elements/header";
 import Sidebar from "../elements/sidebar";
-import { Link, button, useHistory } from 'react-router-dom';
+import { Link, button, useHistory, useLocation } from 'react-router-dom';
 import moment from "moment"
 import React, { useState, useEffect, } from "react";
 import axios from "axios";
@@ -14,37 +14,32 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import Grid from '@material-ui/core/Grid';
+import BlockIcon from '@material-ui/icons/Block';
 
 
-const useStyles = makeStyles((theme) => ({
+
+const useStyles = makeStyles({
     root: {
         width: '100%',
-        flexGrow: 1,
     },
     container: {
-        maxHeight: 400,
+        maxHeight: 440,
     },
-    paper: {
-        padding: theme.spacing(2),
-        textAlign: 'center',
-        color: theme.palette.text.secondary,
-    },
-
-}));
-
-
+});
 export default function StickyHeadTable() {
-    // export default function FullWidthGrid() {
-    // const classes = useStyles();
+
+    const location = useLocation();
+    console.log(location)
 
     const history = useHistory();
+    const [UserSubscriptionMainID, setUserSubscriptionMainID] = useState("");
+    const [UserId, setUserId] = useState(location.state.UserId);
+    const [TPCount, setTPCount] = useState("");
+    const [UserID, setUserID] = useState("");
+    const [Userid, setUserid] = useState("");
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
@@ -53,37 +48,40 @@ export default function StickyHeadTable() {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
-
-    // // All Data handle for data
+    const id = useState(location.state.UserId);
     const [data, setData] = useState([]);
-
     React.useEffect(() => {
-        axios.get(`https://qaapi.jahernotice.com/api/Epp/0`).then((response) => {
+        axios.get(` https://qaapi.jahernotice.com/api/gettpuserdata/` + `${UserId}`).then((response) => {
             setData(response.data.data);
             console.log("Bhola", response.data.data)
-        });
+        }); 
     }, []);
 
-    const editrow = (e) => {
-        console.log(e)
-    }
-    const doGet = React.useCallback(async (params) => {
-        // setData(await getData(params));
-    }, []);
-    React.useEffect(() => {
-        doGet({});
-    }, [doGet]);
 
-    const [search, setSearch] = React.useState('');
-    function onSearchChange(action, state) {
-        const params = {
-            search: state.search,
-        };
-        doGet(params);
+
+    const [isActive, setisActive] = useState("");
+    function saveData(UserSubscriptionMainID, isActive) {
+        let data = { UserSubscriptionMainID, isActive }
+        fetch(`https://qaapi.jahernotice.com/api/tp/isactive`, {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        }).then((resp) => {
+            console.warn("resp", resp);
+            resp.json().then((result) => {
+                console.warn("result", result)
+                setUserSubscriptionMainID();
+                axios.get(` https://qaapi.jahernotice.com/api/gettpuserdata/` + `${UserId}`).then((response) => {
+                    setData(response.data.data);
+                    console.log("Bhola", response.data.data)
+                });
+            })
+        })
     }
-    const handleSearch = (event) => {
-        setSearch(event.target.value);
-    };
+
 
     return (
         <>
@@ -93,38 +91,17 @@ export default function StickyHeadTable() {
                     <Sidebar></Sidebar>
                     <div id="content-wrapper">
                         <div className="container-fluid">
-                            {/* <ol className="breadcrumb"> */}
-                            <Paper sx={{ width: "100%", mb: 0 }}>
+                            <Paper sx={{ width: "200%", mb: 0 }}>
                                 <ol className="breadcrumb">
-                                    <li><h6 className="EPPDite breadcrumb-item active">EPP Details</h6></li>
-                                    <li className="breadcrumb-itemac">
-                                        <Link className="bread breadcrumb-item active" to={'/dashboard'} >Dashboard</Link>
+                                    <li><h6 className="EPPDitetpta breadcrumb-item active">TP Services By UserID</h6></li>
+                                    <li className="breadcrumb-itemac breadcrumb-item active">
+                                        <Link className="bread breadcrumb-item active" to={'/tpalert'} >TP Details</Link>
                                     </li><h6>/</h6>
                                     <li className="breadcrumb-item active">Overview</li>
                                 </ol>
                                 <div className="AddEpp" style={{ border: 'none', color: 'revert' }}>
-                                    {/* <ul className="nav nav-tabs nav-justified"> */}
-                                    <Button className="btn btn-primary tg " id="addd" variant="contained" color="primary">
-                                        <Link variant="contained" color="primary" to={"/eppnewadd"} style={{ border: 'none', color: 'white' }}>Add New Epp</Link>
-                                    </Button>
-                                    {/* <br/> */}
-                                    <Button className="btn btn-primary tg " id="addd1" variant="contained" color="primary">
-                                        <Link variant="contained" color="primary" to={"/eppnewadd1"} style={{ border: 'none', color: 'white' }}>Add Exiting EPP</Link>
-                                    </Button>
                                 </div>
-                                <br />
-                                <form>
-                                    <div className="tb-table-table" style={{ color: '', border: '1px' }}>
-                                        <Button className="btn btn-primary btn-lg " variant="contained" color="primary">ALL</Button>
-                                        {/* className='NAV font-weight-bold' /currentdate  /customize */}
-                                        <Button className="btn4 btn-lg  " style={{ border: 'none', }} variant="outlined" color="primary">
-                                            <Link className='NAV font-weight-bold ' variant="outlined" color="primary" to={"/currentdate"} style={{ border: 'none', color: 'blac' }}>Current-Date</Link>
-                                        </Button>
-                                        <Button className="btn5 btn-lg  " style={{ border: 'none' }} color="primary">
-                                            <Link className='NAV font-weight-bold' variant="contained" color="primary" to={"#"} style={{ border: 'none', color: 'blac' }}>Customize</Link>
-                                        </Button>
-                                    </div>
-                                </form>
+                                {/* <br /> */}
                                 <form className='contenar'>
                                     <>
                                         <form className="" style={{ border: '1px' }}>
@@ -147,7 +124,7 @@ export default function StickyHeadTable() {
                                                         <div id='entrybox'>
                                                             <div class="input-group-mb-3">
                                                                 <div className="input-group a">
-                                                                    <input type="text" value={search} onChange={handleSearch} className="form-control" placeholder="Search for..." aria-label="Search"
+                                                                    <input type="text" className="form-control" placeholder="Search for..." aria-label="Search"
                                                                         aria-describedby="basic-addon2" style={{ height: '2rem', width: '-40rem', }} />
                                                                     <div className="input-group-append" >
                                                                         <Button className=" btn-primary b " type="button" style={{
@@ -167,19 +144,17 @@ export default function StickyHeadTable() {
                                         </form>
                                     </>
                                     <TableContainer component={Paper}>
-                                        <Table sx={{ minWidth: 650 }} className="table  table-striped table-hover" size="small" aria-label="simple table">
+                                        <Table sx={{ minWidth: 650 }} className="table table-striped table-hover" size="small" aria-label="simple table">
                                             <TableHead>
                                                 <TableRow>
                                                     <TableCell>Sr.No</TableCell>
-                                                    <TableCell>Name</TableCell>
-                                                    {/* <TableCell>LastName</TableCell> */}
-                                                    <TableCell>MobileNo</TableCell>
-                                                    <TableCell>EmailID</TableCell>
-                                                    {/* <TableCell>UserID</TableCell> */}
-                                                    <TableCell>EPPCount</TableCell>
-                                                    {/* <TableCell>group_id</TableCell> */}
+                                                    <TableCell>District</TableCell>
+                                                    <TableCell>Taluka</TableCell>
+                                                    <TableCell>Village</TableCell>
+                                                    <TableCell>TP Number</TableCell>
                                                     <TableCell>start_date</TableCell>
-                                                    <TableCell> end_date</TableCell>
+                                                    <TableCell>end_date</TableCell>
+                                                    <TableCell>Status</TableCell>
                                                     <TableCell>Action</TableCell>
                                                 </TableRow>
                                             </TableHead>
@@ -188,46 +163,42 @@ export default function StickyHeadTable() {
                                                     .map((data, index) => (
                                                         <TableRow key={index} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
                                                             <TableCell>{index + 1}</TableCell>
-                                                            <TableCell>{data.FirstName ? data.FirstName : "Null"} {data.LastName}</TableCell>
-                                                            {/* <TableCell>{data.LastName}</TableCell> */}
-                                                            <TableCell>{data.MobileNo}</TableCell>
-                                                            <TableCell>{data.EmailID}</TableCell>
-                                                            {/* <TableCell>{data.UserID}</TableCell> */}
-                                                            <TableCell>{data.EPPCount}</TableCell>
-                                                            {/* <TableCell>{data.group_id}</TableCell> */}
-                                                            <TableCell>{moment(data.start_date).format("MMM/DD/YYYY")}</TableCell>
-                                                            <TableCell>{moment(data.end_date).format("MMM/DD/YYYY")}</TableCell>
+                                                            <TableCell>{data.DistrictName}</TableCell>
+                                                            <TableCell>{data.TalukaName}</TableCell>
+                                                            <TableCell>{data.VillageName}</TableCell>
+                                                            <TableCell>{data.TPNo}</TableCell>
+                                                            <TableCell>{moment(data.startDate).format("MMM/DD/YYYY")}</TableCell>
+                                                            <TableCell>{moment(data.endDate).format("MMM/DD/YYYY")}</TableCell>
+                                                            <TableCell>{data.isActive == 1 ? "Active" : "Inactive"}</TableCell>
                                                             <TableCell>
                                                                 <div className="container">
                                                                     <div class="row">
-                                                                        <div className="col col-lg-3" style={{ marginRight: '12px' }}>
-                                                                            <Button className="Di-Boxa" style={{ border: 'none', color: 'black' }} onClick={() => {
-                                                                                history.push('/eppt2', {
-                                                                                    UserID: (data.UserID)
-                                                                                })
-                                                                            }} >
-                                                                                <i class="bi bi-plus" >
-                                                                                    <svg className="Di-Boxa" to={"/eppt2"} width="23" height="23" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-                                                                                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                                                                                    </svg></i>
-                                                                            </Button>
-                                                                        </div>
-                                                                        <div className="col col-lg-3" style={{ marginRight: '-5px' }}>
-                                                                            <Button className="Submiticone" onClick={() => {
-                                                                                history.push('/eppadd1', {
-                                                                                    start_date: moment(data.start_date).format("YYYY-MM-DD"),
-                                                                                    end_date: moment(data.end_date).format("YYYY-MM-DD"),
+                                                                        <div className="col col-lg-3" style={{ marginRight: '20px' }}>
+                                                                            <Button className="Submiticon" onClick={() => {
+                                                                                history.push('/tpalertedit', {
                                                                                     UserID: (data.UserID),
-                                                                                    active: (data.active == 1),
-                                                                                    active: (data.active == 0)
+                                                                                    UserName: (data.UserId),
+                                                                                    ServiceID: (data.ServiceID),
+                                                                                    Service_Sub_Type_ID: (data.Service_Sub_Type_ID),
+                                                                                    DistrictID: (data.DistrictID),
+                                                                                    TalukaID: (data.TalukaID),
+                                                                                    VillageID: (data.VillageID),
+                                                                                    TPNo: (data.TPNo),
+                                                                                    UserSubscriptionMainID: (data.UserSubscriptionMainID),
+                                                                                    startDate: moment(data.startDate).format("YYYY-MM-DD"),
+                                                                                    endDate: moment(data.endDate).format("YYYY-MM-DD"),
                                                                                 })
-                                                                            }} style={{ border: 'none' }}>
-                                                                                <i class="bi bi-box-arrow-in-down-left font-weight-bold ">
-                                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-in-down-left" viewBox="0 0 16 16">
+                                                                            }}>
+                                                                                <i class="bi bi-box-arrow-in-down-left font-weight-bold">
+                                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-box-arrow-in-down-left" viewBox="0 0 16 16">
                                                                                         <path fill-rule="evenodd" d="M9.636 2.5a.5.5 0 0 0-.5-.5H2.5A1.5 1.5 0 0 0 1 3.5v10A1.5 1.5 0 0 0 2.5 15h10a1.5 1.5 0 0 0 1.5-1.5V6.864a.5.5 0 0 0-1 0V13.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z" />
                                                                                         <path fill-rule="evenodd" d="M5 10.5a.5.5 0 0 0 .5.5h5a.5.5 0 0 0 0-1H6.707l8.147-8.146a.5.5 0 0 0-.708-.708L6 9.293V5.5a.5.5 0 0 0-1 0v5z" />
                                                                                     </svg></i>
                                                                             </Button>
+                                                                        </div>
+                                                                        <div className="col col-lg-3" style={{ marginRight: '-121px', width: "30px", height: "30px" }}>
+                                                                            {(data.isActive == 0 || data.isActive == null) && <i value={data.isActive} id='iconname' name='iconname' className="fa fa-recycle" onClick={() => saveData(data.UserSubscriptionMainID, 1)} />}
+                                                                            {data.isActive == 1 && <i value={data.isActive} id='iconname' name='iconname' className="fa fa-ban" onClick={() => saveData(data.UserSubscriptionMainID, 0)} />}
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -254,5 +225,7 @@ export default function StickyHeadTable() {
             </div>
         </>
     );
-}
+};
+
+
 

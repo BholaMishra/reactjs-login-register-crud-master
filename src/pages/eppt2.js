@@ -19,6 +19,7 @@ import { useLocation } from "react-router-dom";
 import Modal from 'react-bootstrap/Modal';
 import CloseButton from 'react-bootstrap/CloseButton';
 import CheckCircleOutlineSharpIcon from '@material-ui/icons/CheckCircleOutlineSharp';
+import BlockIcon from '@material-ui/icons/Block';
 
 
 function createData(name, code, population, size) {
@@ -35,17 +36,18 @@ const useStyles = makeStyles({
 });
 
 export default function StickyHeadTable() {
-    const history = useHistory();
-    console.log(history)
+
 
     const location = useLocation();
     console.log(location)
 
+    const history = useHistory();
     const [showone, setShowone] = useState(false);
     const handleCloseone = () => setShowone(false);
     const handleShowone = () => setShowone(true);
-    const [id, setid] = useState("");
+    // const [id, setid] = useState("");
 
+    const [UserID, setUserID] = useState(location.state.UserID)
     const [userEPPSubscription, setuserEPPSubscription] = useState("");
     const [Admin_ID, setAdmin_ID] = useState("");
     const classes = useStyles();
@@ -61,11 +63,10 @@ export default function StickyHeadTable() {
         setPage(0);
     };
     // All Data handle for data
-    const [UserID, setUserID] = useState("")
     const [user_id, setuser_id] = useState("");
     const [data, setData] = useState([]);
     React.useEffect(() => {
-        axios.get(`https://qaapi.jahernotice.com//api/EppByID/` + ` ${UserID}?`).then((response) => {
+        axios.get(`https://qaapi.jahernotice.com//api/EppByID/` + `${UserID}?`).then((response) => {
             setData(response.data.data);
             console.log("Bhola", response.data.data)
             // setUserID()
@@ -73,7 +74,7 @@ export default function StickyHeadTable() {
     }, []);
 
     React.useEffect(() => {
-        axios.get(`https://qaapi.jahernotice.com//api/EppByID/` + ` ${UserID}?`).then((response) => {
+        axios.get(`https://qaapi.jahernotice.com//api/EppByID/` + `${UserID}?`).then((response) => {
             setData(response.data.data);
             console.log("Bhola", response.data.data)
             // setUserID()
@@ -85,7 +86,7 @@ export default function StickyHeadTable() {
     const handleClose = () => setShowone(false);
     const handleShow = () => setShow(true);
     // User Active
-    function saveData(userEPPSubscription) {
+    function saveData(userEPPSubscription, active) {
         let data = { Admin_ID, userEPPSubscription, active, }
         fetch('https://qaapi.jahernotice.com/api/active/' + `${userEPPSubscription}`, {
             method: "POST",
@@ -99,7 +100,7 @@ export default function StickyHeadTable() {
             resp.json().then((result) => {
                 console.warn("result", result)
                 setuserEPPSubscription()
-                axios.get(`https://qaapi.jahernotice.com//api/EppByID/${user_id} ` + ` ${UserID}?_=1662787955655`).then((response) => {
+                axios.get(`https://qaapi.jahernotice.com//api/EppByID/` + ` ${UserID}?`).then((response) => {
                     setData(response.data.data);
                     console.log("Bhola", response.data.data)
                 });
@@ -109,7 +110,7 @@ export default function StickyHeadTable() {
     }
     // User Inactive
     const [inactive, setInactive] = useState("");
-    function Deleteuser(userEPPSubscription) {
+    function Deleteuser(userEPPSubscription, inactive) {
         let data = { userEPPSubscription, inactive }
         fetch('https://qaapi.jahernotice.com/api/inactive/' + `${userEPPSubscription}`, {
             method: 'DELETE'
@@ -118,7 +119,7 @@ export default function StickyHeadTable() {
             result.json().then((resp) => {
                 console.log(resp)
                 setuserEPPSubscription()
-                axios.get(`https://qaapi.jahernotice.com//api/EppByID/${user_id} ` + ` ${UserID}?_=1662787955655`).then((response) => {
+                axios.get(`https://qaapi.jahernotice.com//api/EppByID/` + ` ${UserID}?`).then((response) => {
                     setData(response.data.data);
                     console.log("Bhola", response.data.data)
                 });
@@ -138,9 +139,9 @@ export default function StickyHeadTable() {
                             className="container-fluid">
                             <Paper sx={{ width: "200%", mb: 0 }}>
                                 <ol className="breadcrumb">
-                                    <li><h6 className="EPPDite3">EPP Details By UserID</h6></li>
+                                    <li><h6 className="EPPDite3 breadcrumb-item active">EPP Details By UserID</h6></li>
                                     <li className="breadcrumb-itemac">
-                                        <Link className="bread" to={'/epp'} >EPP Ditel</Link>
+                                        <Link className="bread breadcrumb-item active" to={'/epp'} >EPP Ditel</Link>
                                     </li><h6>/</h6>
                                     <li className="breadcrumb-item active">Overview</li>
                                 </ol>
@@ -212,16 +213,12 @@ export default function StickyHeadTable() {
                                                             <TableCell>{data.survey_number ? data.survey_number : "Null"}</TableCell>
                                                             <TableCell>{moment(data.start_date).format("MMM/DD/YYYY")}</TableCell>
                                                             <TableCell>{moment(data.end_date).format("MMM/DD/YYYY")}</TableCell>
-                                                            <TableCell >{data.active == 1 ? "Active" : "Inactive"}</TableCell>
+                                                            <TableCell >{data.active == 5 ? "Active" : "Inactive"}</TableCell>
                                                             <TableCell>
-                                                                <div class="container">
-                                                                    <div class="row justify-content-md-center">
-                                                                        <div class="col col-lg-2">
-                                                                            {data.active == 0 && <i value={data.iconname} id='iconname' name='iconname' className="fa fa-recycle" onclick={saveData} onClick={() => saveData(data.userEPPSubscription)} />}
-                                                                            {data.active == 1 && <i value={data.icon} id='icon' name='icon' className="fa fa-ban" onclick={Deleteuser} onClick={() => Deleteuser(data.userEPPSubscription)} aria-hidden="true" />}
-                                                                        </div>
-                                                                        <div className="col col-lg-2">
-                                                                            <Button className="Submiticone" onClick={() => {
+                                                                <div className="container">
+                                                                    <div class="row">
+                                                                        <div className="col col-lg-3" style={{ marginRight: '25px' }}>
+                                                                            <Button className="Submit" onClick={() => {
                                                                                 history.push('/newaddepp2', {
                                                                                     district: (data.district),
                                                                                     taluka: (data.taluka),
@@ -233,11 +230,16 @@ export default function StickyHeadTable() {
                                                                                 })
                                                                             }}>
                                                                                 <i class="bi bi-box-arrow-in-down-left" onclick="enable()">
-                                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-box-arrow-in-down-left" viewBox="0 0 16 16">
+                                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-in-down-left" viewBox="0 0 16 16">
                                                                                         <path fill-rule="evenodd" d="M9.636 2.5a.5.5 0 0 0-.5-.5H2.5A1.5 1.5 0 0 0 1 3.5v10A1.5 1.5 0 0 0 2.5 15h10a1.5 1.5 0 0 0 1.5-1.5V6.864a.5.5 0 0 0-1 0V13.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z" />
                                                                                         <path fill-rule="evenodd" d="M5 10.5a.5.5 0 0 0 .5.5h5a.5.5 0 0 0 0-1H6.707l8.147-8.146a.5.5 0 0 0-.708-.708L6 9.293V5.5a.5.5 0 0 0-1 0v5z" />
                                                                                     </svg></i>
                                                                             </Button>
+                                                                        </div>
+                                                                        <div className="col col-lg-3" style={{ marginRight: '-121px', width: "30px", height: "30px" }}>
+                                                                            {data.active == 0 || data.active == 1 && <i value={data.iconname} id='iconname' name='iconname' className="fa fa-recycle" onclick={saveData} onClick={() => saveData(data.userEPPSubscription, 1)} />}
+                                                                            {/* {data.active == 1 && <i value={data.iconname} id='iconname' name='iconname' className="fa fa-recycle" onclick={saveData} onClick={() => saveData(data.userEPPSubscription)} />} */}
+                                                                            {data.active == 5 && <i value={data.icon} id='iconname' name='icon' className="fa fa-ban" onclick={Deleteuser} onClick={() => Deleteuser(data.userEPPSubscription, 0)} aria-hidden="true" />}
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -269,7 +271,8 @@ export default function StickyHeadTable() {
                                                                     {/* <Modal.Footer> */}
                                                                     <div class="row justify-content-md-center rowend">
                                                                         <div class="col col-lg-2">
-                                                                            <Button className='secondaryclose' variant="primary" color="primary"><Link to={'/eppt2'}>OK</Link></Button>
+                                                                            <Button className='secondaryclose' variant="primary" color="primary">
+                                                                                <Link to={'/eppt2'}>OK</Link></Button>
                                                                         </div>
                                                                         <div class="col col-lg-2"><Button className='secondaryclosebutton' variant="secondary" onClick={handleCloseone}>No</Button>
                                                                         </div>

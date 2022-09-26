@@ -3,10 +3,11 @@ import { Button, Link, } from '@material-ui/core'
 import axios from "axios";
 import { useNavigate, useHistory } from 'react-router-dom'
 import { NavLink } from "react-router-dom";
+
+
 const Register = () => {
     //   const navigate = useNavigate();
     const history = useHistory();
-
     const [formErrors, setFormErrors] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
     const [user, setUserDetails] = useState({
@@ -71,11 +72,10 @@ const Register = () => {
             });
         }
     }, [formErrors]);
+
     return (
         <>
-            <div
-                className='register'
-            >
+            <div className='register'            >
                 <form>
                     <h4>Epp</h4>
                     <h6>Create your account</h6>
@@ -87,7 +87,7 @@ const Register = () => {
                         onChange={changeHandler}
                         value={user.fname}
                     />
-                    <p
+                    <p className="FormErrorss"
                     //   className={basestyle.error}
                     >{formErrors.fname}</p>
                     <input
@@ -98,7 +98,7 @@ const Register = () => {
                         onChange={changeHandler}
                         value={user.lname}
                     />
-                    <p
+                    <p className="FormErrorss"
                     //    className={basestyle.error}
                     >{formErrors.lname}</p>
                     <input
@@ -109,7 +109,7 @@ const Register = () => {
                         onChange={changeHandler}
                         value={user.email}
                     />
-                    <p
+                    <p className="FormErrorss"
                     //   className={basestyle.error}
                     >{formErrors.email}</p>
                     <input
@@ -120,7 +120,7 @@ const Register = () => {
                         onChange={changeHandler}
                         value={user.password}
                     />
-                    <p
+                    <p className="FormErrorss"
                     //   className={basestyle.error}
                     >{formErrors.password}</p>
                     <input
@@ -131,13 +131,13 @@ const Register = () => {
                         onChange={changeHandler}
                         value={user.cpassword}
                     />
-                    <p
+                    <p className="FormErrorss"
                     //   className={basestyle.error}
                     >{formErrors.cpassword}</p>
                     <Button type='submit' color='primary' variant="contained" onClick={signupHandler} fullWidth>
                         {/* <NavLink to="/epp" color="white" > */}
-                            SignUP
-                            {/* </NavLink> */}
+                        SignUP
+                        {/* </NavLink> */}
                     </Button>
                 </form>
                 <NavLink to="/login">Already registered? Login</NavLink>

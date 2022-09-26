@@ -14,37 +14,26 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import Grid from '@material-ui/core/Grid';
+import AddIcon from '@material-ui/icons/Add';
 
 
-const useStyles = makeStyles((theme) => ({
+
+const useStyles = makeStyles({
     root: {
         width: '100%',
-        flexGrow: 1,
     },
     container: {
-        maxHeight: 400,
+        maxHeight: 440,
     },
-    paper: {
-        padding: theme.spacing(2),
-        textAlign: 'center',
-        color: theme.palette.text.secondary,
-    },
-
-}));
-
+});
 
 export default function StickyHeadTable() {
-    // export default function FullWidthGrid() {
-    // const classes = useStyles();
 
     const history = useHistory();
+    const [UsersubscriptionMainID, setUsersubscriptionMainID] = useState("");
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
@@ -54,36 +43,22 @@ export default function StickyHeadTable() {
         setPage(0);
     };
 
-    // // All Data handle for data
     const [data, setData] = useState([]);
-
     React.useEffect(() => {
-        axios.get(`https://qaapi.jahernotice.com/api/Epp/0`).then((response) => {
+        axios.get(`https://qaapi.jahernotice.com/api/tpservice/count`).then((response) => {
             setData(response.data.data);
             console.log("Bhola", response.data.data)
         });
     }, []);
 
-    const editrow = (e) => {
-        console.log(e)
-    }
-    const doGet = React.useCallback(async (params) => {
-        // setData(await getData(params));
-    }, []);
     React.useEffect(() => {
-        doGet({});
-    }, [doGet]);
+        axios.get(`https://qaapi.jahernotice.com/api/tpservice/count?_=1663608645945`).then((response) => {
+            setData(response.data.data);
+            console.log("Bhola", response.data.data)
+        });
+    }, []);
 
-    const [search, setSearch] = React.useState('');
-    function onSearchChange(action, state) {
-        const params = {
-            search: state.search,
-        };
-        doGet(params);
-    }
-    const handleSearch = (event) => {
-        setSearch(event.target.value);
-    };
+
 
     return (
         <>
@@ -93,38 +68,25 @@ export default function StickyHeadTable() {
                     <Sidebar></Sidebar>
                     <div id="content-wrapper">
                         <div className="container-fluid">
-                            {/* <ol className="breadcrumb"> */}
-                            <Paper sx={{ width: "100%", mb: 0 }}>
+                            <Paper sx={{ width: "200%", mb: 0 }}>
                                 <ol className="breadcrumb">
-                                    <li><h6 className="EPPDite breadcrumb-item active">EPP Details</h6></li>
+                                    <li><h6 className="EPPDite2 breadcrumb-item active" style={{ Color: 'blac' }} >TP Details</h6></li>
                                     <li className="breadcrumb-itemac">
                                         <Link className="bread breadcrumb-item active" to={'/dashboard'} >Dashboard</Link>
                                     </li><h6>/</h6>
                                     <li className="breadcrumb-item active">Overview</li>
                                 </ol>
                                 <div className="AddEpp" style={{ border: 'none', color: 'revert' }}>
-                                    {/* <ul className="nav nav-tabs nav-justified"> */}
-                                    <Button className="btn btn-primary tg " id="addd" variant="contained" color="primary">
-                                        <Link variant="contained" color="primary" to={"/eppnewadd"} style={{ border: 'none', color: 'white' }}>Add New Epp</Link>
-                                    </Button>
-                                    {/* <br/> */}
-                                    <Button className="btn btn-primary tg " id="addd1" variant="contained" color="primary">
-                                        <Link variant="contained" color="primary" to={"/eppnewadd1"} style={{ border: 'none', color: 'white' }}>Add Exiting EPP</Link>
+                                    <Button className="btn btn-primary tg " id="addd3" variant="contained" color="primary" onClick={() => {
+                                        history.push('/tpalertserves', {
+                                            UserId: (data.UserId),
+                                        })
+                                    }}>
+                                        {/* /auctionadd */}
+                                        <Link variant="contained" color="primary" to={"/tpalertserves"} style={{ border: 'none', color: 'white' }}>Add Service</Link>
                                     </Button>
                                 </div>
                                 <br />
-                                <form>
-                                    <div className="tb-table-table" style={{ color: '', border: '1px' }}>
-                                        <Button className="btn btn-primary btn-lg " variant="contained" color="primary">ALL</Button>
-                                        {/* className='NAV font-weight-bold' /currentdate  /customize */}
-                                        <Button className="btn4 btn-lg  " style={{ border: 'none', }} variant="outlined" color="primary">
-                                            <Link className='NAV font-weight-bold ' variant="outlined" color="primary" to={"/currentdate"} style={{ border: 'none', color: 'blac' }}>Current-Date</Link>
-                                        </Button>
-                                        <Button className="btn5 btn-lg  " style={{ border: 'none' }} color="primary">
-                                            <Link className='NAV font-weight-bold' variant="contained" color="primary" to={"#"} style={{ border: 'none', color: 'blac' }}>Customize</Link>
-                                        </Button>
-                                    </div>
-                                </form>
                                 <form className='contenar'>
                                     <>
                                         <form className="" style={{ border: '1px' }}>
@@ -147,7 +109,7 @@ export default function StickyHeadTable() {
                                                         <div id='entrybox'>
                                                             <div class="input-group-mb-3">
                                                                 <div className="input-group a">
-                                                                    <input type="text" value={search} onChange={handleSearch} className="form-control" placeholder="Search for..." aria-label="Search"
+                                                                    <input type="text" className="form-control" placeholder="Search for..." aria-label="Search"
                                                                         aria-describedby="basic-addon2" style={{ height: '2rem', width: '-40rem', }} />
                                                                     <div className="input-group-append" >
                                                                         <Button className=" btn-primary b " type="button" style={{
@@ -167,19 +129,19 @@ export default function StickyHeadTable() {
                                         </form>
                                     </>
                                     <TableContainer component={Paper}>
-                                        <Table sx={{ minWidth: 650 }} className="table  table-striped table-hover" size="small" aria-label="simple table">
+                                        <Table
+                                            sx={{ minWidth: 650 }}
+                                            className="table table-striped table-hover"
+                                            size="small"
+                                            aria-label="simple table"
+                                        >
                                             <TableHead>
                                                 <TableRow>
                                                     <TableCell>Sr.No</TableCell>
                                                     <TableCell>Name</TableCell>
-                                                    {/* <TableCell>LastName</TableCell> */}
-                                                    <TableCell>MobileNo</TableCell>
-                                                    <TableCell>EmailID</TableCell>
-                                                    {/* <TableCell>UserID</TableCell> */}
-                                                    <TableCell>EPPCount</TableCell>
-                                                    {/* <TableCell>group_id</TableCell> */}
-                                                    <TableCell>start_date</TableCell>
-                                                    <TableCell> end_date</TableCell>
+                                                    <TableCell>Mobile Number</TableCell>
+                                                    <TableCell>Email</TableCell>
+                                                    <TableCell>TP Count</TableCell>
                                                     <TableCell>Action</TableCell>
                                                 </TableRow>
                                             </TableHead>
@@ -188,44 +150,24 @@ export default function StickyHeadTable() {
                                                     .map((data, index) => (
                                                         <TableRow key={index} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
                                                             <TableCell>{index + 1}</TableCell>
-                                                            <TableCell>{data.FirstName ? data.FirstName : "Null"} {data.LastName}</TableCell>
-                                                            {/* <TableCell>{data.LastName}</TableCell> */}
+                                                            <TableCell>{data.FirstName} {data.LastName}</TableCell>
                                                             <TableCell>{data.MobileNo}</TableCell>
                                                             <TableCell>{data.EmailID}</TableCell>
-                                                            {/* <TableCell>{data.UserID}</TableCell> */}
-                                                            <TableCell>{data.EPPCount}</TableCell>
-                                                            {/* <TableCell>{data.group_id}</TableCell> */}
-                                                            <TableCell>{moment(data.start_date).format("MMM/DD/YYYY")}</TableCell>
-                                                            <TableCell>{moment(data.end_date).format("MMM/DD/YYYY")}</TableCell>
+                                                            <TableCell>{data.TPCount}</TableCell>
                                                             <TableCell>
-                                                                <div className="container">
-                                                                    <div class="row">
-                                                                        <div className="col col-lg-3" style={{ marginRight: '12px' }}>
-                                                                            <Button className="Di-Boxa" style={{ border: 'none', color: 'black' }} onClick={() => {
-                                                                                history.push('/eppt2', {
-                                                                                    UserID: (data.UserID)
+                                                                <div class="row">
+                                                                    <div class="col-1" style={{ bold: '2' }}>
+                                                                        <div class="col-1" style={{ bold: '2' }}>
+                                                                            <Button className="Submiticone " onClick={() => {
+                                                                                history.push('/tpalerttable', {
+                                                                                    UserId: (data.UserId),
+                                                                                    isActive: (data.isActive)
                                                                                 })
-                                                                            }} >
+                                                                            }}>
+                                                                                {/* <AddIcon style={{ fontSize: 'extralarge' }}></AddIcon> */}
                                                                                 <i class="bi bi-plus" >
-                                                                                    <svg className="Di-Boxa" to={"/eppt2"} width="23" height="23" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                                                                    <svg className="Di-Boxa" to={"/eppt2"} width="25" height="25" size='bold' fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                                                                                         <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                                                                                    </svg></i>
-                                                                            </Button>
-                                                                        </div>
-                                                                        <div className="col col-lg-3" style={{ marginRight: '-5px' }}>
-                                                                            <Button className="Submiticone" onClick={() => {
-                                                                                history.push('/eppadd1', {
-                                                                                    start_date: moment(data.start_date).format("YYYY-MM-DD"),
-                                                                                    end_date: moment(data.end_date).format("YYYY-MM-DD"),
-                                                                                    UserID: (data.UserID),
-                                                                                    active: (data.active == 1),
-                                                                                    active: (data.active == 0)
-                                                                                })
-                                                                            }} style={{ border: 'none' }}>
-                                                                                <i class="bi bi-box-arrow-in-down-left font-weight-bold ">
-                                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-in-down-left" viewBox="0 0 16 16">
-                                                                                        <path fill-rule="evenodd" d="M9.636 2.5a.5.5 0 0 0-.5-.5H2.5A1.5 1.5 0 0 0 1 3.5v10A1.5 1.5 0 0 0 2.5 15h10a1.5 1.5 0 0 0 1.5-1.5V6.864a.5.5 0 0 0-1 0V13.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z" />
-                                                                                        <path fill-rule="evenodd" d="M5 10.5a.5.5 0 0 0 .5.5h5a.5.5 0 0 0 0-1H6.707l8.147-8.146a.5.5 0 0 0-.708-.708L6 9.293V5.5a.5.5 0 0 0-1 0v5z" />
                                                                                     </svg></i>
                                                                             </Button>
                                                                         </div>
@@ -254,5 +196,5 @@ export default function StickyHeadTable() {
             </div>
         </>
     );
-}
+};
 

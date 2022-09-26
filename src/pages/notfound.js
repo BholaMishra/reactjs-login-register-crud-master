@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Header from "../elements/header";
 import Sidebar from "../elements/sidebar";
 import { Link } from "react-router-dom";
@@ -30,7 +30,7 @@ const NotFound = () => {
                     <footer className="sticky-footer">
                         <div className="container my-auto">
                             <div className="copyright text-center my-auto">
-                                <span>Copyright © Your Website 2022<div>{(new Date().getFullYear())}</div></span>
+                                <span><div>{(new Date().getFullYear())}</div></span>
                             </div>
                         </div>
                     </footer>
@@ -39,10 +39,10 @@ const NotFound = () => {
         </div>
     );
 }
-const { string, object } = PropTypes;
-NotFound.propTypes = {
-    title: string.isRequired,
-    history: object
-};
+// const { string, object } = PropTypes;
+// NotFound.propTypes = {
+//     title: string.isRequired,
+//     history: object
+// };
 export default NotFound;
 // export default withRouter(NotFound)
